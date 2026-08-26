@@ -1,0 +1,1510 @@
+/* =====================================================
+   KWKMA GALLERY PAGE
+   ===================================================== */
+
+/* =====================================================
+   RESET
+   ===================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", "Noto Sans Bengali", sans-serif;
+
+  background: #f5f5f5;
+  color: #111;
+
+  min-height: 100vh;
+}
+
+/* =====================================================
+   LAYOUT
+   ===================================================== */
+
+.dashboard-layout {
+  min-height: 100vh;
+  display: flex;
+}
+
+/* =====================================================
+   MAIN CONTENT
+   ===================================================== */
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  min-height: 100vh;
+}
+
+/* =====================================================
+   TOPBAR
+   ===================================================== */
+
+.topbar {
+  height: 92px;
+  padding: 0 4%;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* TOP LEFT */
+
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.page-label {
+  display: block;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1.8px;
+
+  color: #c51a30;
+
+  margin-bottom: 3px;
+}
+
+.top-left h1 {
+  font-size: 25px;
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  color: #111;
+}
+
+/* MOBILE MENU */
+
+.mobile-menu {
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid #e6e6e6;
+  background: #fff;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  color: #111;
+
+  font-size: 17px;
+}
+
+/* =====================================================
+   TOP RIGHT
+   ===================================================== */
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* SYSTEM STATUS */
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: #f2f8f3;
+  color: #55735c;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.system-status span {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #1b9b58;
+}
+
+/* ADMIN */
+
+.top-admin {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.top-avatar {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(211, 160, 81, 0.25);
+}
+
+.top-avatar img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+}
+
+.top-admin strong {
+  display: block;
+  font-size: 10px;
+}
+
+.top-admin small {
+  display: block;
+  margin-top: 3px;
+  color: #999;
+  font-size: 8px;
+}
+
+.top-admin > i {
+  margin-left: 5px;
+
+  font-size: 10px;
+
+  color: #999;
+}
+
+/* =====================================================
+   GALLERY CONTENT
+   ===================================================== */
+
+.gallery-content {
+  padding: 32px;
+}
+
+/* =====================================================
+   INTRO
+   ===================================================== */
+
+.gallery-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 28px;
+}
+
+.section-label {
+  display: block;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1.7px;
+
+  color: #c51a30;
+
+  margin-bottom: 7px;
+}
+
+.intro-text h2 {
+  font-size: 27px;
+
+  font-weight: 800;
+
+  color: #111;
+
+  line-height: 1.25;
+}
+
+.intro-text h2 span {
+  color: #b89532;
+
+  font-size: 18px;
+
+  margin-left: 5px;
+}
+
+.intro-text p {
+  margin-top: 7px;
+
+  font-size: 13px;
+
+  color: #777;
+
+  line-height: 1.6;
+}
+
+/* =====================================================
+   ADD PHOTO BUTTON
+   ===================================================== */
+
+.add-photo-btn {
+  height: 46px;
+
+  padding: 0 20px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background: #111;
+
+  color: #fff;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.add-photo-btn:hover {
+  background: #222;
+}
+
+.add-photo-btn i {
+  font-size: 12px;
+}
+
+/* =====================================================
+   GALLERY PANEL
+   ===================================================== */
+
+.gallery-panel {
+  background: #fff;
+
+  border: 1px solid #e8e8e8;
+
+  border-radius: 12px;
+
+  padding: 25px;
+}
+
+/* =====================================================
+   PANEL HEADER
+   ===================================================== */
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #eeeeee;
+
+  margin-bottom: 22px;
+}
+
+.panel-header h3 {
+  font-size: 18px;
+
+  font-weight: 800;
+
+  color: #111;
+}
+
+/* PHOTO COUNT */
+
+.photo-count {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 8px 12px;
+
+  background: #f7f7f7;
+
+  border-radius: 6px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  color: #666;
+}
+
+.photo-count i {
+  color: #a28327;
+}
+
+/* =====================================================
+   GALLERY GRID
+   ===================================================== */
+
+.gallery-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+/* =====================================================
+   GALLERY CARD
+   ===================================================== */
+
+.gallery-card {
+  position: relative;
+
+  background: #f5f5f5;
+
+  border-radius: 9px;
+
+  overflow: hidden;
+
+  aspect-ratio: 1 / 1;
+
+  cursor: pointer;
+
+  border: 1px solid #eeeeee;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition: transform 0.25s ease;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.04);
+}
+
+/* =====================================================
+   CARD OVERLAY
+   ===================================================== */
+
+.gallery-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+
+  padding: 12px;
+
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.42), transparent 45%);
+
+  opacity: 0;
+
+  transition: opacity 0.2s ease;
+}
+
+.gallery-card:hover .gallery-overlay {
+  opacity: 1;
+}
+
+/* VIEW BUTTON */
+
+.view-image-btn {
+  width: 35px;
+  height: 35px;
+
+  border: 0;
+
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  color: #111;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  font-size: 12px;
+}
+
+/* =====================================================
+   EMPTY STATE
+   ===================================================== */
+
+.gallery-empty {
+  min-height: 310px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 30px;
+}
+
+.empty-icon {
+  width: 65px;
+  height: 65px;
+
+  border-radius: 50%;
+
+  background: #f5f2e8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #a28327;
+
+  font-size: 23px;
+
+  margin-bottom: 16px;
+}
+
+.gallery-empty h4 {
+  font-size: 16px;
+
+  font-weight: 800;
+
+  color: #222;
+}
+
+.gallery-empty p {
+  margin-top: 6px;
+
+  font-size: 12px;
+
+  color: #888;
+}
+
+.empty-add-btn {
+  margin-top: 18px;
+
+  border: 0;
+
+  background: #111;
+
+  color: #fff;
+
+  border-radius: 7px;
+
+  height: 40px;
+
+  padding: 0 15px;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  cursor: pointer;
+}
+
+/* =====================================================
+   LOADING
+   ===================================================== */
+
+.gallery-loading {
+  min-height: 310px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  width: 35px;
+  height: 35px;
+
+  border: 3px solid #eeeeee;
+
+  border-top-color: #a28327;
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+.gallery-loading p {
+  margin-top: 12px;
+
+  font-size: 12px;
+
+  color: #888;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   MODAL OVERLAY
+   ===================================================== */
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  background: rgba(0, 0, 0, 0.58);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+/* =====================================================
+   UPLOAD MODAL
+   ===================================================== */
+
+.upload-modal {
+  width: 100%;
+  max-width: 500px;
+
+  background: #fff;
+
+  border-radius: 13px;
+
+  overflow: hidden;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+/* =====================================================
+   MODAL HEADER
+   ===================================================== */
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding: 23px 25px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.modal-header h3 {
+  font-size: 19px;
+
+  font-weight: 800;
+
+  color: #111;
+}
+
+.modal-close {
+  width: 34px;
+  height: 34px;
+
+  border: 0;
+
+  border-radius: 7px;
+
+  background: #f5f5f5;
+
+  color: #666;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  transition: 0.2s all ease;
+}
+
+.modal-close:hover {
+  background: #c51a30;
+  color: #ffff;
+}
+
+/* =====================================================
+   UPLOAD AREA
+   ===================================================== */
+
+.upload-area {
+  margin: 25px;
+
+  min-height: 220px;
+
+  border: 1.5px dashed #d8d8d8;
+
+  border-radius: 10px;
+
+  background: #fafafa;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 25px;
+}
+
+.upload-icon {
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
+
+  background: #f5f2e8;
+
+  color: #a28327;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+
+  margin-bottom: 13px;
+}
+
+.upload-area h4 {
+  font-size: 15px;
+
+  font-weight: 800;
+
+  color: #222;
+}
+
+.upload-area p {
+  margin-top: 5px;
+
+  font-size: 11px;
+
+  color: #999;
+}
+
+.choose-photo-btn {
+  margin-top: 16px;
+
+  height: 39px;
+
+  padding: 0 16px;
+
+  border: 1px solid #dedede;
+
+  border-radius: 7px;
+
+  background: #fff;
+
+  color: #222;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* =====================================================
+   SELECTED PREVIEW
+   ===================================================== */
+
+.selected-preview {
+  margin: 0 25px 20px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 10px;
+
+  border: 1px solid #e8e8e8;
+
+  border-radius: 9px;
+
+  background: #fafafa;
+}
+
+.preview-image {
+  width: 60px;
+  height: 60px;
+
+  border-radius: 7px;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+
+  background: #eee;
+}
+
+.preview-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.preview-info {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.preview-info strong {
+  display: block;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  color: #222;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.preview-info span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 10px;
+
+  color: #999;
+}
+
+.remove-selected {
+  width: 30px;
+  height: 30px;
+
+  border: 0;
+
+  border-radius: 6px;
+
+  background: #f0f0f0;
+
+  color: #777;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+/* =====================================================
+   UPLOAD STATUS
+   ===================================================== */
+
+.upload-status {
+  margin: 0 25px 20px;
+
+  min-height: 40px;
+
+  border-radius: 7px;
+
+  background: #f6f3e9;
+
+  color: #866b19;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 12px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status-spinner {
+  width: 15px;
+  height: 15px;
+
+  border: 2px solid rgba(162, 131, 39, 0.25);
+
+  border-top-color: #a28327;
+
+  border-radius: 50%;
+
+  animation: spin 0.7s linear infinite;
+}
+
+/* =====================================================
+   MODAL FOOTER
+   ===================================================== */
+
+.modal-footer {
+  padding: 18px 25px;
+
+  border-top: 1px solid #eeeeee;
+
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 9px;
+}
+
+.cancel-btn,
+.upload-btn {
+  height: 40px;
+
+  padding: 0 16px;
+
+  border-radius: 7px;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+}
+
+.cancel-btn {
+  border: 1px solid #ddd;
+
+  background: #fff;
+
+  color: #555;
+}
+
+.upload-btn {
+  border: 0;
+
+  background: #111;
+
+  color: #fff;
+}
+
+.upload-btn:disabled {
+  background: #ccc;
+
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   IMAGE VIEWER
+   ===================================================== */
+
+.image-viewer {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 10000;
+
+  background: rgba(0, 0, 0, 0.92);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px;
+}
+
+.image-viewer img {
+  max-width: 100%;
+  max-height: 90vh;
+
+  object-fit: contain;
+
+  border-radius: 5px;
+}
+
+.viewer-close {
+  position: absolute;
+
+  top: 20px;
+  right: 25px;
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  color: #fff;
+
+  font-size: 17px;
+
+  cursor: pointer;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.gallery-footer {
+  padding: 25px 0 5px;
+
+  text-align: center;
+
+  font-size: 11px;
+
+  color: #999;
+}
+
+.gallery-footer span {
+  font-weight: 800;
+
+  color: #555;
+}
+
+/* =====================================================
+   HIDDEN
+   ===================================================== */
+
+[hidden] {
+  display: none !important;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 1100px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    padding: 0 22px;
+  }
+
+  .gallery-content {
+    padding: 25px 22px;
+  }
+
+  .system-status {
+    display: none;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .topbar {
+    height: 72px;
+
+    padding: 0 16px;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .top-right {
+    gap: 0;
+  }
+
+  .top-admin > div:nth-child(2),
+  .top-admin > i {
+    display: none;
+  }
+
+  .top-avatar {
+    width: 37px;
+    height: 37px;
+  }
+
+  .gallery-content {
+    padding: 20px 16px;
+  }
+
+  .gallery-intro {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    margin-bottom: 20px;
+  }
+
+  .add-photo-btn {
+    width: 100%;
+  }
+
+  .gallery-panel {
+    padding: 17px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+  .panel-header {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-left {
+    gap: 10px;
+  }
+
+  .top-left h1 {
+    font-size: 21px;
+  }
+
+  .page-label {
+    font-size: 8px;
+  }
+
+  .intro-text h2 {
+    font-size: 23px;
+  }
+
+  .panel-header {
+    flex-direction: column;
+  }
+
+  .photo-count {
+    align-self: flex-start;
+  }
+
+  .gallery-grid {
+    gap: 9px;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .upload-modal {
+    max-height: 94vh;
+
+    overflow-y: auto;
+  }
+
+  .modal-header {
+    padding: 19px;
+  }
+
+  .upload-area {
+    margin: 19px;
+
+    min-height: 190px;
+  }
+
+  .selected-preview {
+    margin-left: 19px;
+    margin-right: 19px;
+  }
+
+  .upload-status {
+    margin-left: 19px;
+    margin-right: 19px;
+  }
+
+  .modal-footer {
+    padding: 15px 19px;
+  }
+
+  .cancel-btn,
+  .upload-btn {
+    flex: 1;
+  }
+
+  .image-viewer {
+    padding: 20px;
+  }
+
+  .viewer-close {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+/* =====================================================
+   DELETE IMAGE BUTTON
+   ===================================================== */
+
+.gallery-card {
+  position: relative;
+}
+
+.delete-image-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #000000;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  z-index: 10;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Hover */
+
+.delete-image-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Click */
+
+.delete-image-btn:active {
+  transform: scale(0.92);
+}
+/* =====================================================
+   DELETE IMAGE BUTTON
+   ===================================================== */
+
+.gallery-card {
+  position: relative;
+}
+
+.delete-image-btn {
+  position: absolute;
+
+  top: 10px;
+  right: 10px;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #000000;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  z-index: 20;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.delete-image-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.delete-image-btn:active {
+  transform: scale(0.92);
+}
+
+.delete-image-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+/* =====================================================
+   GALLERY DELETE BUTTON
+   ===================================================== */
+
+.delete-image-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #000000;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  z-index: 20;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.delete-image-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.delete-image-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   DELETE CARD STATE
+   ===================================================== */
+
+.gallery-card.deleting {
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* =====================================================
+   DELETE CONFIRM MODAL
+   ===================================================== */
+
+.gallery-delete-modal {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  z-index: 99999;
+}
+
+.gallery-delete-box {
+  width: min(420px, 100%);
+
+  padding: 30px;
+
+  background: #ffffff;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.gallery-delete-icon {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fee2e2;
+  color: #dc2626;
+
+  font-size: 22px;
+}
+
+.gallery-delete-box h3 {
+  margin: 0 0 8px;
+
+  color: #111111;
+
+  font-size: 21px;
+}
+
+.gallery-delete-box p {
+  margin: 0;
+
+  color: #666666;
+
+  line-height: 1.6;
+
+  font-size: 14px;
+}
+
+.gallery-delete-actions {
+  display: flex;
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 24px;
+}
+
+.gallery-delete-cancel,
+.gallery-delete-confirm {
+  min-width: 110px;
+
+  height: 42px;
+
+  padding: 0 18px;
+
+  border-radius: 8px;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+.gallery-delete-cancel {
+  background: #eeeeee;
+  color: #222222;
+}
+
+.gallery-delete-cancel:hover {
+  background: #dddddd;
+}
+
+.gallery-delete-confirm {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.gallery-delete-confirm:hover {
+  background: #b91c1c;
+}
+
+/* =====================================================
+   DELETE SUCCESS TOAST
+   ===================================================== */
+
+.gallery-delete-toast {
+  position: fixed;
+
+  right: 25px;
+  bottom: 25px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 13px 18px;
+
+  background: #111111;
+  color: #ffffff;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+
+  z-index: 100000;
+
+  animation: galleryToastIn 0.3s ease;
+}
+
+.gallery-delete-toast i {
+  color: #22c55e;
+  font-size: 18px;
+}
+
+.gallery-delete-toast.hide {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s ease;
+}
+
+@keyframes galleryToastIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

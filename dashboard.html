@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>KWKMA | Admin Dashboard</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+
+  <body>
+    <div class="dashboard-layout">
+      <!-- ================= SIDEBAR Start ================= -->
+      <div id="commonSidebar"></div>
+      <!-- ================= SIDEBAR End ================= -->
+
+      <!-- ================= MAIN ================= -->
+
+      <main class="main-content">
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+          <div class="top-left">
+            <button class="mobile-menu" id="mobileMenu">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div>
+              <span class="page-label"> KWKMA ADMINISTRATION </span>
+
+              <h1>Dashboard</h1>
+            </div>
+          </div>
+
+          <div class="top-right">
+            <div class="system-status">
+              <span></span>
+
+              System Online
+            </div>
+
+            <div class="top-admin">
+              <div class="top-avatar">
+                <img src="./images/logo.png" alt="KWKMA Logo" />
+              </div>
+
+              <div>
+                <strong>Administrator</strong>
+
+                <small> Admin Account </small>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+        </header>
+
+        <!-- ================= CONTENT ================= -->
+
+        <section class="dashboard-content">
+          <!-- Welcome -->
+
+          <div class="welcome-section">
+            <div>
+              <span class="section-label"> OVERVIEW </span>
+
+              <h2>
+                Welcome back, Admin
+                <span>✦</span>
+              </h2>
+
+              <p>আপনার KWKMA Academy-এর আজকের overview এক নজরে দেখুন।</p>
+            </div>
+
+            <div class="date-box">
+              <i class="fa-regular fa-calendar"></i>
+
+              <span id="todayDate"> Loading... </span>
+            </div>
+          </div>
+
+          <!-- ================= STATS ================= -->
+
+          <div class="stats-container">
+            <!-- Total Students -->
+
+            <div class="stat-card gold-card">
+              <div class="stat-header">
+                <span> TOTAL STUDENTS </span>
+
+                <div class="stat-icon">
+                  <i class="fa-solid fa-user-graduate"></i>
+                </div>
+              </div>
+
+              <h3 data-target="0">0</h3>
+
+              <p>Currently enrolled</p>
+            </div>
+
+            <!-- New Admission -->
+
+            <div class="stat-card red-card">
+              <div class="stat-header">
+                <span> NEW ADMISSION </span>
+
+                <div class="stat-icon">
+                  <i class="fa-solid fa-user-plus"></i>
+                </div>
+              </div>
+
+              <h3 data-target="0">0</h3>
+
+              <p>This month</p>
+            </div>
+
+            <!-- Monthly Admission -->
+
+            <div class="stat-card dark-card">
+              <div class="stat-header">
+                <span> MONTHLY ADMISSION </span>
+
+                <div class="stat-icon">
+                  <i class="fa-solid fa-calendar-check"></i>
+                </div>
+              </div>
+
+              <h3 data-target="0">0</h3>
+
+              <p>Admission this month</p>
+            </div>
+
+            <!-- Fee Paid -->
+
+            <div class="stat-card white-card">
+              <div class="stat-header">
+                <span> FEE PAID </span>
+
+                <div class="stat-icon">
+                  <i class="fa-solid fa-hand-holding-dollar"></i>
+                </div>
+              </div>
+
+              <h3 data-target="0">0</h3>
+
+              <p>Paid this month</p>
+            </div>
+          </div>
+
+          <!-- ================= LOWER ================= -->
+
+          <div class="lower-grid">
+            <!-- QUICK MANAGEMENT -->
+
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <span class="section-label"> QUICK ACCESS </span>
+
+                  <h3>Management Center</h3>
+                </div>
+
+                <button class="more-btn">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </button>
+              </div>
+
+              <div class="quick-grid">
+                <button class="quick-card">
+                  <div class="quick-icon gold">
+                    <i class="fa-solid fa-user-graduate"></i>
+                  </div>
+
+                  <div>
+                    <strong>Students</strong>
+                    <span>Manage students</span>
+                  </div>
+
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <button class="quick-card">
+                  <div class="quick-icon red">
+                    <i class="fa-solid fa-person-chalkboard"></i>
+                  </div>
+
+                  <div>
+                    <strong>Teachers</strong>
+                    <span>Add or edit teacher</span>
+                  </div>
+
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <button class="quick-card">
+                  <div class="quick-icon dark">
+                    <i class="fa-regular fa-images"></i>
+                  </div>
+
+                  <div>
+                    <strong>Gallery</strong>
+                    <span>Add academy photos</span>
+                  </div>
+
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <button class="quick-card">
+                  <div class="quick-icon soft">
+                    <i class="fa-solid fa-receipt"></i>
+                  </div>
+
+                  <div>
+                    <strong>Fees</strong>
+                    <span>Track monthly fees</span>
+                  </div>
+
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </section>
+
+            <!-- ACTIVITY -->
+
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <span class="section-label"> RECENT ACTIVITY </span>
+
+                  <h3>Activity Center</h3>
+                </div>
+
+                <span class="ready-badge"> FIREBASE READY </span>
+              </div>
+
+              <div class="empty-activity">
+                <div class="activity-icon">
+                  <i class="fa-solid fa-bolt"></i>
+                </div>
+
+                <h4>Dynamic activity is coming</h4>
+
+                <p>
+                  Firebase connect করার পর এখানে admission, fee payment এবং
+                  website changes-এর latest activity দেখা যাবে।
+                </p>
+              </div>
+            </section>
+          </div>
+
+          <footer class="dashboard-footer">
+            <span>KWKMA</span>
+            Admin Panel
+          </footer>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="js/common-sidebar.js"></script>
+
+    <script type="module" src="js/dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>KWKMA | Admin Login</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+
+  <body>
+    <div class="login-container">
+      <div class="login-box">
+        <div style="text-align: center">
+          <a href="./admin.html"
+            ><img
+              style="width: 70px; height: 100%; margin: auto; cursor: pointer"
+              src="./images/logo.png"
+              alt=""
+          /></a>
+        </div>
+
+        <p class="small-title">ADMINISTRATION</p>
+
+        <h1>Admin Login</h1>
+
+        <p class="description">
+          শুধুমাত্র অনুমোদিত Administrator এখানে Login করতে পারবেন।
+        </p>
+
+        <form id="loginForm">
+          <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Admin Email" required />
+          </div>
+
+          <div class="input-group">
+            <label>Password</label>
+
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+              />
+
+              <button
+                type="button"
+                id="togglePassword"
+                class="password-toggle"
+                aria-label="Show password"
+              >
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" herf="./dashboard.html" class="login-btn">
+            Login
+          </button>
+
+          <p id="loginMessage"></p>
+          <div style="text-align: center">
+            <a class="a" href="./index.html">Back to Home?</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="js/admin.js"></script>
+  </body>
+</html>

@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>KWKMA | Gallery</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
+
+    <!-- dashboard Css -->
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <!-- Gallery CSS -->
+    <link rel="stylesheet" href="css/gallery.css" />
+  </head>
+
+  <body>
+    <div class="dashboard-layout">
+      <!-- ================= SIDEBAR ================= -->
+      <div id="commonSidebar"></div>
+      <!-- ================= SIDEBAR END ================= -->
+
+      <!-- ================= MAIN ================= -->
+      <main class="main-content">
+        <!-- ================= TOPBAR ================= -->
+        <header class="topbar">
+          <div class="top-left">
+            <button
+              class="mobile-menu"
+              id="mobileMenu"
+              type="button"
+              aria-label="Open Menu"
+            >
+              <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div>
+              <span class="page-label"> KWKMA ADMINISTRATION </span>
+
+              <h1>Gallery</h1>
+            </div>
+          </div>
+
+          <div class="top-right">
+            <div class="system-status">
+              <span></span>
+              System Online
+            </div>
+
+            <div class="top-admin">
+              <div class="top-avatar">
+                <img src="./images/logo.png" alt="KWKMA Logo" />
+              </div>
+
+              <div>
+                <strong>Administrator</strong>
+                <small>Admin Account</small>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+        </header>
+        <!-- ================= TOPBAR END ================= -->
+
+        <!-- ================= CONTENT ================= -->
+        <section class="gallery-content">
+          <!-- ================= PAGE INTRO ================= -->
+          <div class="gallery-intro">
+            <div class="intro-text">
+              <span class="section-label"> MEDIA CENTER </span>
+
+              <h2>
+                Academy Gallery
+                <span>✦</span>
+              </h2>
+
+              <p>Upload and manage KWKMA Academy photos from here.</p>
+            </div>
+
+            <!-- ADD PHOTO -->
+            <button class="add-photo-btn" id="addPhotoBtn" type="button">
+              <i class="fa-solid fa-plus"></i>
+              Add Photo
+            </button>
+          </div>
+          <!-- ================= PAGE INTRO END ================= -->
+
+          <!-- ================= GALLERY PANEL ================= -->
+          <section class="gallery-panel">
+            <div class="panel-header">
+              <div>
+                <span class="section-label"> ALL PHOTOS </span>
+
+                <h3>Academy Photos</h3>
+              </div>
+
+              <div class="photo-count">
+                <i class="fa-regular fa-images"></i>
+                <span id="photoCount">0 Photos</span>
+              </div>
+            </div>
+
+            <!-- ================= LOADING ================= -->
+            <div class="gallery-loading" id="galleryLoading">
+              <div class="loading-spinner"></div>
+
+              <p>Loading photos...</p>
+            </div>
+            <!-- ================= LOADING END ================= -->
+
+            <!-- ================= EMPTY ================= -->
+            <div class="gallery-empty" id="galleryEmpty" hidden>
+              <div class="empty-icon">
+                <i class="fa-regular fa-images"></i>
+              </div>
+
+              <h4>No photos yet</h4>
+
+              <p>Add your first academy photo to the gallery.</p>
+
+              <button class="empty-add-btn" id="emptyAddBtn" type="button">
+                <i class="fa-solid fa-plus"></i>
+                Add Photo
+              </button>
+            </div>
+            <!-- ================= EMPTY END ================= -->
+
+            <!-- ================= GALLERY GRID ================= -->
+            <div class="gallery-grid" id="galleryGrid"></div>
+            <!-- ================= GALLERY GRID END ================= -->
+          </section>
+          <!-- ================= GALLERY PANEL END ================= -->
+
+          <!-- ================= FOOTER ================= -->
+          <footer class="gallery-footer">
+            <span>KWKMA</span>
+            Admin Panel
+          </footer>
+        </section>
+        <!-- ================= CONTENT END ================= -->
+      </main>
+      <!-- ================= MAIN END ================= -->
+    </div>
+
+    <!-- ================= ADD PHOTO MODAL ================= -->
+    <div class="modal-overlay" id="photoModal" hidden>
+      <div class="upload-modal">
+        <!-- MODAL HEADER -->
+        <div class="modal-header">
+          <div>
+            <span class="section-label"> GALLERY </span>
+
+            <h3>Add Photo</h3>
+          </div>
+
+          <button
+            class="modal-close"
+            id="closeModalBtn"
+            type="button"
+            aria-label="Close"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- UPLOAD AREA -->
+        <div class="upload-area" id="uploadArea">
+          <input
+            type="file"
+            id="photoInput"
+            accept="image/jpeg,image/png,image/webp,image/jpg"
+            hidden
+          />
+
+          <div class="upload-icon">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+
+          <h4>Choose a photo</h4>
+
+          <p>JPG, PNG or WEBP</p>
+
+          <button class="choose-photo-btn" id="choosePhotoBtn" type="button">
+            <i class="fa-regular fa-image"></i>
+            Choose Photo
+          </button>
+        </div>
+
+        <!-- SELECTED IMAGE PREVIEW -->
+        <div class="selected-preview" id="selectedPreview" hidden>
+          <div class="preview-image">
+            <img id="previewImage" src="" alt="Selected Photo" />
+          </div>
+
+          <div class="preview-info">
+            <strong id="selectedFileName"> Selected Photo </strong>
+
+            <span id="selectedFileSize"> 0 KB </span>
+          </div>
+
+          <button
+            class="remove-selected"
+            id="removeSelectedBtn"
+            type="button"
+            aria-label="Remove selected photo"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- UPLOAD STATUS -->
+        <div class="upload-status" id="uploadStatus" hidden>
+          <div class="status-spinner"></div>
+
+          <span id="uploadStatusText"> Uploading photo... </span>
+        </div>
+
+        <!-- MODAL FOOTER -->
+        <div class="modal-footer">
+          <button class="cancel-btn" id="cancelUploadBtn" type="button">
+            Cancel
+          </button>
+
+          <button class="upload-btn" id="uploadPhotoBtn" type="button" disabled>
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            Upload Photo
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- ================= ADD PHOTO MODAL END ================= -->
+
+    <!-- ================= IMAGE VIEWER ================= -->
+    <div class="image-viewer" id="imageViewer" hidden>
+      <button
+        class="viewer-close"
+        id="viewerCloseBtn"
+        type="button"
+        aria-label="Close Image"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <img id="viewerImage" src="" alt="Gallery Image" />
+    </div>
+    <!-- ================= IMAGE VIEWER END ================= -->
+
+    <!-- COMMON SIDEBAR -->
+    <script type="module" src="js/common-sidebar.js"></script>
+
+    <!-- GALLERY JS -->
+    <script type="module" src="js/gallery.js"></script>
+  </body>
+</html>

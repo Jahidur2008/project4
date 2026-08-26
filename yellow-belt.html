@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Yellow Belt | KWKMA Admin</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
+
+    <!-- Dashboard -->
+    <link rel="stylesheet" href="./css/dashboard.css" />
+
+    <!-- Total Students -->
+    <link rel="stylesheet" href="./css/total-students.css" />
+
+    <!-- Yellow Belt -->
+    <link rel="stylesheet" href="./css/yellow-belt.css" />
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <div id="commonSidebar"></div>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="top-left">
+          <button class="mobile-menu" id="mobileMenu" type="button">☰</button>
+
+          <div>
+            <div class="page-label">STUDENT MANAGEMENT</div>
+            <h1>Yellow Belt</h1>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <div class="system-status">
+            <span></span>
+            Firebase Connected
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <section class="page-content">
+        <!-- PAGE HEADING -->
+        <div class="yellow-page-header">
+          <div>
+            <div class="section-label">YELLOW BELT STUDENTS</div>
+
+            <h2>
+              <span class="belt-dot yellow"></span>
+              Yellow Belt
+            </h2>
+
+            <p>
+              Students promoted from Red Belt after successfully passing their
+              examination are listed here.
+            </p>
+          </div>
+
+          <button class="refresh-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate"></i>
+            Refresh
+          </button>
+        </div>
+
+        <!-- STATS -->
+        <div class="yellow-stats">
+          <!-- TOTAL -->
+          <div class="yellow-stat">
+            <div class="yellow-stat-icon yellow-icon">
+              <i class="fa-solid fa-medal"></i>
+            </div>
+
+            <div>
+              <span>YELLOW BELT STUDENTS</span>
+              <strong id="totalYellowStudents">0</strong>
+            </div>
+          </div>
+
+          <!-- EXAM GIVEN -->
+          <div class="yellow-stat">
+            <div class="yellow-stat-icon gold-icon">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+
+            <div>
+              <span>EXAM GIVEN</span>
+              <strong id="examGiven">0</strong>
+            </div>
+          </div>
+
+          <!-- PASSED -->
+          <div class="yellow-stat">
+            <div class="yellow-stat-icon green-icon">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div>
+              <span>PASSED</span>
+              <strong id="passedCount">0</strong>
+            </div>
+          </div>
+
+          <!-- FAILED -->
+          <div class="yellow-stat">
+            <div class="yellow-stat-icon dark-icon">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+
+            <div>
+              <span>FAILED</span>
+              <strong id="failedCount">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-card">
+          <!-- TABLE HEADER -->
+          <div class="table-header">
+            <div>
+              <h3>Yellow Belt Student List</h3>
+
+              <span id="tableStatus"> Loading students... </span>
+            </div>
+
+            <div class="table-search">
+              <input
+                type="search"
+                id="searchInput"
+                placeholder="Search registration ID, name or phone..."
+              />
+            </div>
+          </div>
+
+          <!-- TABLE -->
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>SL</th>
+                  <th>Registration ID</th>
+                  <th>Student Name</th>
+                  <th>Phone Number</th>
+                  <th>Ongoing Belt</th>
+                  <th>Red Belt Exam Mark</th>
+                  <th>Result</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="yellowBeltTableBody"></tbody>
+            </table>
+
+            <!-- EMPTY -->
+            <div class="empty-state hidden" id="emptyState">
+              <div class="empty-icon">🟡</div>
+
+              <h3>No Yellow Belt Students Found</h3>
+
+              <p>Students promoted from Red Belt will appear here.</p>
+            </div>
+
+            <!-- LOADING -->
+            <div class="loading-state hidden" id="loadingState">
+              <div class="loader"></div>
+
+              <p>Loading students...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =====================================================
+         EXAM MODAL
+    ====================================================== -->
+
+    <div class="modal" id="examModal">
+      <div class="modal-box">
+        <!-- CLOSE -->
+        <button
+          type="button"
+          class="exam-modal-close"
+          id="examModalClose"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+
+        <!-- ICON -->
+        <div class="modal-icon yellow-modal-icon">
+          <i class="fa-solid fa-medal"></i>
+        </div>
+
+        <span class="section-label yellow-label">
+          YELLOW BELT EXAMINATION
+        </span>
+
+        <h3>Enter Exam Mark</h3>
+
+        <!-- STUDENT -->
+        <div class="exam-student">
+          <strong id="examStudentName"> - </strong>
+
+          <span id="examRegistration"> - </span>
+        </div>
+
+        <!-- CURRENT BELT -->
+        <div class="current-belt-box yellow-current-belt">
+          <span> Current Belt </span>
+
+          <strong> 🟡 Yellow Belt </strong>
+        </div>
+
+        <!-- MARK -->
+        <label for="examMark"> Exam Mark </label>
+
+        <div class="mark-input">
+          <input
+            type="number"
+            id="examMark"
+            min="0"
+            max="100"
+            placeholder="Enter mark"
+          />
+
+          <span> / 100 </span>
+        </div>
+
+        <!-- RESULT -->
+        <div class="result-preview" id="resultPreview">
+          Enter a mark to see result
+        </div>
+
+        <!-- SAVE -->
+        <button
+          class="save-result-btn yellow-save-btn"
+          id="saveResultBtn"
+          type="button"
+        >
+          <i class="fa-solid fa-arrow-up"></i>
+
+          Save Result & Promote
+        </button>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         STUDENT PROFILE MODAL
+    ====================================================== -->
+
+    <div id="studentModal" class="modal-overlay hidden">
+      <div class="student-modal">
+        <button class="modal-close" id="studentModalClose">×</button>
+
+        <div class="modal-header">
+          <div>
+            <span> YELLOW BELT STUDENT </span>
+
+            <h2 id="modalRegistrationNo">KWKMA-01</h2>
+          </div>
+
+          <div class="modal-status approved" id="modalStatus">YELLOW BELT</div>
+        </div>
+
+        <div class="student-profile">
+          <div class="modal-photo-box">
+            <img id="modalStudentPhoto" src="" alt="Student Photo" />
+
+            <div class="modal-photo-placeholder">NO PHOTO</div>
+          </div>
+
+          <div class="profile-info">
+            <h3 id="modalStudentName">STUDENT NAME</h3>
+
+            <p>KWKMA Student</p>
+          </div>
+        </div>
+
+        <!-- PERSONAL INFORMATION -->
+        <div class="details-section">
+          <div class="details-title">PERSONAL INFORMATION</div>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <span>Father's Name</span>
+              <strong id="modalFatherName">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Mother's Name</span>
+              <strong id="modalMotherName">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Gender</span>
+              <strong id="modalGender">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Date of Birth</span>
+              <strong id="modalDob">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Blood Group</span>
+              <strong id="modalBlood">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Religion</span>
+              <strong id="modalReligion">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Nationality</span>
+              <strong id="modalNationality">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Mobile Number</span>
+              <strong id="modalMobile">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Email</span>
+              <strong id="modalEmail">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Education</span>
+              <strong id="modalEducation">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Occupation</span>
+              <strong id="modalOccupation">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Marital Status</span>
+              <strong id="modalMarital">-</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADDRESS -->
+        <div class="details-section">
+          <div class="details-title">ADDRESS INFORMATION</div>
+
+          <div class="address-grid">
+            <div class="address-item">
+              <span> Present Address </span>
+
+              <p id="modalPresentAddress">-</p>
+            </div>
+
+            <div class="address-item">
+              <span> Permanent Address </span>
+
+              <p id="modalPermanentAddress">-</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MARTIAL ARTS -->
+        <div class="details-section">
+          <div class="details-title">MARTIAL ARTS INFORMATION</div>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <span> Previous Experience </span>
+
+              <strong id="modalExperience"> - </strong>
+            </div>
+
+            <div class="detail-item">
+              <span> Previous Belt Rank </span>
+
+              <strong id="modalBelt"> - </strong>
+            </div>
+
+            <div class="detail-item">
+              <span> Training </span>
+
+              <strong id="modalTraining"> - </strong>
+            </div>
+
+            <div class="detail-item">
+              <span> Contribution </span>
+
+              <strong id="modalContribution"> - </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPTS -->
+
+    <script type="module" src="js/common-sidebar.js"></script>
+
+    <!-- তোমার Yellow Belt JS -->
+    <script type="module" src="./js/yellow-belt.js"></script>
+  </body>
+</html>

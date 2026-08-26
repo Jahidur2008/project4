@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Kushtia Wushu Kung-Fu Martial Art Academy - KWKMA"
+    />
+    <title>KWKMA | MARTIAL ART ACADEMY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="navbar" id="navbar">
+      <div class="nav-container">
+        <a class="brand" href="#home" aria-label="KWKMA Home">
+          <img src="images/logo.png" alt="KWKMA Logo" />
+          <div class="brand-text">
+            <strong>KWKMA</strong>
+            <span>KUSHTIA WUSHU KUNG-FU MARTIAL ART ACADEMY</span>
+          </div>
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+          <a class="nav-link active" href="#home">Home</a>
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#teacher">Teacher</a>
+          <a class="nav-link" href="#beltRanking">Belt Ranking</a>
+          <a class="nav-link" href="#classFees">Classes & Fees</a>
+          <a class="nav-link" href="#gallery">Gallery</a>
+          <a class="nav-link" href="#contact">Contact</a>
+          <a class="unique-btn nav-unique-btn" href="./admission.html"
+            >Addmission<i class="fa-solid fa-arrow-right"></i
+          ></a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="home">
+        <div class="slides">
+          <article
+            class="slide active"
+            style="background-image: url(&quot;images/banner1.jpg&quot;)"
+          >
+            <div class="hero-content">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-bolt"></i> DISCIPLINE • STRENGTH •
+                CONFIDENCE</span
+              >
+              <h1>BUILD YOUR <em>STRENGTH.</em></h1>
+              <p>
+                শরীর, মন ও আত্মবিশ্বাসকে আরও শক্তিশালী করতে মার্শাল আর্টের সঠিক
+                প্রশিক্ষণ নিন।
+              </p>
+              <a class="unique-btn primary-btn" href="#contact"
+                >Join Academy <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+
+          <article
+            class="slide"
+            style="background-image: url(&quot;images/banner2.jpg&quot;)"
+          >
+            <div class="hero-content">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-fire"></i> TRAIN • LEARN • GROW</span
+              >
+              <h1>LEARN WITH <em>DISCIPLINE.</em></h1>
+              <p>
+                Wushu, Kung-Fu এবং Self Defence-এর মাধ্যমে শৃঙ্খলা ও আত্মবিশ্বাস
+                গড়ে তুলুন।
+              </p>
+              <a class="unique-btn primary-btn" href="#teacher"
+                >Meet Teacher <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+
+          <article
+            class="slide"
+            style="background-image: url(&quot;images/banner3.jpg&quot;)"
+          >
+            <div class="hero-content">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-shield-halved"></i> SELF DEFENCE •
+                FITNESS</span
+              >
+              <h1>POWER OF <em>SELF DEFENCE.</em></h1>
+              <p>
+                আত্মরক্ষা শুধু লড়াই নয়—এটি সচেতনতা, আত্মনিয়ন্ত্রণ এবং
+                আত্মবিশ্বাসের শিক্ষা।
+              </p>
+              <a class="unique-btn primary-btn" href="#about"
+                >Discover More <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+        </div>
+
+        <!-- No arrows: only automatic slider + dots -->
+        <div class="slider-dots" id="sliderDots" aria-label="Slider controls">
+          <button class="dot active" aria-label="Slide 1"></button>
+          <button class="dot" aria-label="Slide 2"></button>
+          <button class="dot" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="hero-bottom">
+          <span>KWKMA</span>
+          <span class="line"></span>
+          <span>SCROLL TO EXPLORE</span>
+        </div>
+      </section>
+
+      <!-- ABOUT / QUOTE -->
+      <section class="about section" id="about">
+        <div class="container">
+          <div class="section-head reveal">
+            <span>OUR PHILOSOPHY</span>
+            <h2>
+              আত্মরক্ষা শুধু শক্তি নয়,<br /><strong>এটি একটি শিক্ষা।</strong>
+            </h2>
+            <div class="gold-line"></div>
+          </div>
+
+          <div class="quote-card reveal">
+            <div class="quote-mark">“</div>
+            <p>
+              আত্মরক্ষা মানে শুধু প্রতিপক্ষকে পরাজিত করা নয়; নিজের ভয়কে জয়
+              করা, আত্মবিশ্বাস অর্জন করা এবং বিপদের সময় সঠিক সিদ্ধান্ত নেওয়ার
+              ক্ষমতা অর্জন করা।
+            </p>
+            <span>— KWKMA Philosophy</span>
+          </div>
+
+          <div class="features">
+            <article class="feature reveal">
+              <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+              <h3>Self Defence</h3>
+              <p>
+                নিজেকে নিরাপদ রাখার জন্য প্রয়োজনীয় আত্মরক্ষার কৌশল ও সচেতনতা
+                শেখানো হয়।
+              </p>
+            </article>
+            <article class="feature reveal">
+              <div class="icon"><i class="fa-solid fa-dumbbell"></i></div>
+              <h3>Fitness</h3>
+              <p>
+                শারীরিক সক্ষমতা, flexibility, balance এবং endurance উন্নত করার
+                প্রশিক্ষণ।
+              </p>
+            </article>
+            <article class="feature reveal">
+              <div class="icon"><i class="fa-solid fa-brain"></i></div>
+              <h3>Discipline</h3>
+              <p>
+                আত্মনিয়ন্ত্রণ, মনোযোগ, ধৈর্য এবং নিয়মিত অনুশীলনের মাধ্যমে নিজেকে
+                গড়ে তোলা।
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SINGLE TEACHER -->
+      <section class="teacher section" id="teacher">
+        <div class="container">
+          <div class="section-head light reveal">
+            <span>OUR INSTRUCTOR</span>
+            <h2>Meet Our <strong>Teacher</strong></h2>
+            <div class="gold-line"></div>
+            <p>
+              অভিজ্ঞ প্রশিক্ষকের তত্ত্বাবধানে নিয়মিত অনুশীলনের মাধ্যমে দক্ষতা ও
+              আত্মবিশ্বাস তৈরি করুন।
+            </p>
+          </div>
+
+          <article class="teacher-card reveal">
+            <div class="teacher-photo">
+              <img src="images/teacher.jpg" alt="KWKMA Instructor" />
+              <div class="photo-badge">COACH & FOUNDER</div>
+            </div>
+            <div class="teacher-info">
+              <span class="role">FOUNDER &amp; COACH</span>
+              <h3>MD. RAFI AHNAF KHAN</h3>
+              <p class="teacher-title">Founder &amp; Coach • KWKMA</p>
+              <p class="teacher-bio">
+                Kushtia Wushu Kung-Fu Martial Art Academy-এর Founder &amp; Coach
+                এবং National Kung-Fu Player ও National Wushu Coach হিসেবে
+                প্রশিক্ষণ পরিচালনা করছেন।
+              </p>
+              <div class="teacher-credentials">
+                <div>
+                  <i class="fa-solid fa-medal"></i
+                  ><span>National Kung-Fu Player</span>
+                </div>
+                <div>
+                  <i class="fa-solid fa-user-shield"></i
+                  ><span>National Wushu Coach</span>
+                </div>
+                <div>
+                  <i class="fa-solid fa-flag"></i
+                  ><span>Bangladesh Wushu Federation</span>
+                </div>
+                <div>
+                  <i class="fa-solid fa-building-columns"></i
+                  ><span>Bangladesh Olympic Association</span>
+                </div>
+                <div>
+                  <i class="fa-solid fa-certificate"></i
+                  ><span
+                    >IOC Olympic Solidarity Certified Technical Course for
+                    Coaches (Wushu)</span
+                  >
+                </div>
+              </div>
+              <div class="teacher-social">
+                <a href="#" aria-label="Facebook"
+                  ><i class="fab fa-facebook-f"></i
+                ></a>
+                <a href="#" aria-label="Instagram"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+                <a href="#" aria-label="YouTube"
+                  ><i class="fab fa-youtube"></i
+                ></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- BELT RANKING -->
+      <section class="beltRanking section" id="beltRanking">
+        <div class="container">
+          <div class="section-head reveal">
+            <span>ACADEMY ADMINISTRATION</span>
+            <h2>Belt <strong>Ranking System</strong></h2>
+            <div class="gold-line"></div>
+            <p>
+              KWKMA-এর training progression-এ প্রতিটি belt একজন শিক্ষার্থীর
+              skill, discipline, control ও ধারাবাহিক উন্নতির একটি ধাপকে নির্দেশ
+              করে।
+            </p>
+          </div>
+
+          <div class="belt-intro reveal">
+            <div class="belt-intro-icon">
+              <i class="fa-solid fa-ranking-star"></i>
+            </div>
+            <div>
+              <span>KWKMA BELT PROGRESSION</span>
+              <h3>Discipline <b>•</b> Skill <b>•</b> Progress</h3>
+            </div>
+            <div class="belt-progress-line" aria-hidden="true">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="belt-grid">
+            <article class="belt-card belt-red reveal">
+              <div class="belt-badge"><span></span></div>
+              <span class="belt-level">01</span>
+              <h3>Red Belt</h3>
+              <p>
+                উন্নত পর্যায়ের training, discipline এবং advanced techniques-এর
+                দিকে অগ্রসর হওয়ার ধাপ।
+              </p>
+              <span class="belt-tag">ADVANCED STAGE</span>
+            </article>
+            <article class="belt-card belt-yellow reveal">
+              <div class="belt-badge"><span></span></div>
+              <span class="belt-level">02</span>
+              <h3>Yellow Belt</h3>
+              <p>
+                Martial Arts-এর fundamentals, basic stance, movement এবং
+                প্রাথমিক techniques শেখার ধাপ।
+              </p>
+              <span class="belt-tag">FOUNDATION</span>
+            </article>
+            <article class="belt-card belt-orange reveal">
+              <div class="belt-badge"><span></span></div>
+              <span class="belt-level">03</span>
+              <h3>Orange Belt</h3>
+              <p>
+                Basic skills আরও উন্নত করা এবং নতুন techniques, coordination ও
+                movement practice করার ধাপ।
+              </p>
+              <span class="belt-tag">DEVELOPMENT</span>
+            </article>
+            <article class="belt-card belt-green reveal">
+              <div class="belt-badge"><span></span></div>
+              <span class="belt-level">04</span>
+              <h3>Green Belt</h3>
+              <p>
+                Intermediate training, body control, balance এবং technique
+                development-এর গুরুত্বপূর্ণ ধাপ।
+              </p>
+              <span class="belt-tag">INTERMEDIATE</span>
+            </article>
+            <article class="belt-card belt-blue reveal">
+              <div class="belt-badge"><span></span></div>
+              <span class="belt-level">05</span>
+              <h3>Blue Belt</h3>
+              <p>
+                Advanced techniques, speed, balance, accuracy ও stronger
+                fundamentals-এর দিকে অগ্রসর হওয়ার ধাপ।
+              </p>
+              <span class="belt-tag">ADVANCED TRAINING</span>
+            </article>
+            <article class="belt-card belt-brown reveal">
+              <div class="belt-badge"><span></span></div>
+              <span class="belt-level">06</span>
+              <h3>Brown Belt</h3>
+              <p>
+                উচ্চ পর্যায়ের skill, discipline, control এবং advanced
+                practice-এর জন্য প্রস্তুতির ধাপ।
+              </p>
+              <span class="belt-tag">PRE-BLACK</span>
+            </article>
+            <article class="belt-card belt-black reveal">
+              <div class="belt-badge"><span></span></div>
+              <span class="belt-level">07</span>
+              <h3>Black Belt</h3>
+              <p>
+                দক্ষতার উচ্চ পর্যায়—mastery, discipline, leadership এবং অন্যদের
+                guide করার প্রস্তুতির ধাপ।
+              </p>
+              <span class="belt-tag">MASTERY</span>
+            </article>
+          </div>
+
+          <div class="belt-note reveal">
+            <i class="fa-solid fa-circle-info"></i>
+            <p>
+              <strong>Note:</strong> Belt level ও পরীক্ষার নির্দিষ্ট
+              requirements academy-এর official training curriculum অনুযায়ী
+              নির্ধারিত হবে।
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLASSES & FEES -->
+      <section class="classes section" id="classFees">
+        <div class="container">
+          <div class="section-head reveal">
+            <span>TRAINING SCHEDULE</span>
+            <h2>Classes <strong>&amp; Fees</strong></h2>
+            <div class="gold-line"></div>
+            <p>
+              নিয়মিত প্রশিক্ষণ, সঠিক সময়সূচি এবং সহজ fee structure — সব তথ্য এক
+              জায়গায়।
+            </p>
+          </div>
+
+          <div class="schedule-wrap reveal">
+            <div class="schedule-top">
+              <div>
+                <span class="mini-label">WEEKLY TRAINING</span>
+                <h3 class="h3">ক্লাস সপ্তাহে <strong>৩ দিন</strong></h3>
+              </div>
+              <div class="day-pills">
+                <span>শনিবার</span>
+                <span>মঙ্গলবার</span>
+                <span>বৃহস্পতিবার</span>
+              </div>
+            </div>
+
+            <div class="schedule-table">
+              <div class="table-row table-head">
+                <div>CLASS DAY</div>
+                <div><i class="fa-solid fa-person-dress"></i> মেয়ে</div>
+                <div><i class="fa-solid fa-person"></i> ছেলে</div>
+              </div>
+              <div class="table-row">
+                <div><strong>শনিবার</strong></div>
+                <div><b>৩:০০ – ৪:৩০</b><small>PM</small></div>
+                <div><b>৫:০০ – ৬:৩০</b><small>PM</small></div>
+              </div>
+              <div class="table-row">
+                <div><strong>মঙ্গলবার</strong></div>
+                <div><b>৩:০০ – ৪:৩০</b><small>PM</small></div>
+                <div><b>৫:০০ – ৬:৩০</b><small>PM</small></div>
+              </div>
+              <div class="table-row">
+                <div><strong>বৃহস্পতিবার</strong></div>
+                <div><b>৩:০০ – ৪:৩০</b><small>PM</small></div>
+                <div><b>৫:০০ – ৬:৩০</b><small>PM</small></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fee-heading reveal">
+            <span>ACADEMY FEES</span>
+            <h3>Simple &amp; Transparent</h3>
+          </div>
+
+          <div class="fee-boxes">
+            <article class="fee-box admission reveal">
+              <div class="fee-box-icon">
+                <i class="fa-solid fa-id-card"></i>
+              </div>
+              <div>
+                <span>ADMISSION FEE</span>
+                <strong>৳ ১,৫০০<span>/-</span></strong>
+                <p>এককালীন ভর্তি ফি</p>
+              </div>
+            </article>
+
+            <article class="fee-box monthly reveal">
+              <div class="fee-box-icon">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <div>
+                <span>MONTHLY FEE</span>
+                <strong>৳ ১,০০০<span>/-</span></strong>
+                <p>প্রতি মাসের প্রশিক্ষণ ফি</p>
+              </div>
+              <em>MONTHLY</em>
+            </article>
+          </div>
+        </div>
+      </section>
+
+<<!-- ================= GALLERY ================= -->
+<section class="gallery section" id="gallery">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <span>OUR ACTIVITIES</span>
+
+      <h2>
+        Training <strong>Gallery</strong>
+      </h2>
+
+      <div class="gold-line"></div>
+
+    </div>
+
+
+    <!-- DYNAMIC GALLERY -->
+    <div
+      class="gallery-grid"
+      id="homeGalleryGrid"
+    >
+
+      <!-- Loading -->
+      <div
+        class="gallery-loading"
+        id="homeGalleryLoading"
+      >
+
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        <span>Loading gallery...</span>
+
+      </div>
+
+    </div>
+
+    <!-- VIEW ALL GALLERY BUTTON -->
+    <div class="gallery-view-more-wrap" id="galleryViewMoreWrap" hidden>
+      <button
+        type="button"
+        class="unique-btn primary-btn gallery-view-more"
+        id="galleryViewMore"
+      >
+        View All Gallery
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FULLSCREEN PHOTO VIEWER
+===================================================== -->
+
+<div
+  class="gallery-lightbox"
+  id="galleryLightbox"
+  aria-hidden="true"
+>
+
+  <button
+    type="button"
+    class="gallery-lightbox-close"
+    id="galleryLightboxClose"
+    aria-label="Close photo viewer"
+  >
+
+    <i class="fa-solid fa-xmark"></i>
+
+  </button>
+
+
+  <button
+    type="button"
+    class="gallery-lightbox-prev"
+    id="galleryLightboxPrev"
+    aria-label="Previous photo"
+  >
+
+    <i class="fa-solid fa-chevron-left"></i>
+
+  </button>
+
+
+  <div class="gallery-lightbox-content">
+
+    <img
+      id="galleryLightboxImage"
+      src=""
+      alt="KWKMA Gallery Photo"
+    />
+
+  </div>
+
+
+  <button
+    type="button"
+    class="gallery-lightbox-next"
+    id="galleryLightboxNext"
+    aria-label="Next photo"
+  >
+
+    <i class="fa-solid fa-chevron-right"></i>
+
+  </button>
+
+
+  <div
+    class="gallery-lightbox-counter"
+    id="galleryLightboxCounter"
+  >
+    1 / 1
+  </div>
+
+</div>
+
+      <!-- CONTACT -->
+      <section class="contact section" id="contact">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="contact-copy reveal">
+              <span>GET IN TOUCH</span>
+              <h2>Start Your <strong>Journey.</strong></h2>
+              <p>
+                KWKMA-তে martial arts শেখার জন্য আমাদের সাথে যোগাযোগ করুন। আপনার
+                training journey আজ থেকেই শুরু হতে পারে।
+              </p>
+
+              <div class="contact-list">
+                <div class="contact-item">
+                  <div class="contact-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div>
+                    <small>ADDRESS</small>
+                    <p>
+                      22, Purna Chandra Lahiri Lane (Gosala Road), Courtpara,
+                      Kushtia, Bangladesh
+                    </p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <div class="contact-icon">
+                    <i class="fa-solid fa-phone"></i>
+                  </div>
+                  <div>
+                    <small>PHONE</small>
+                    <p>+880 1741-162882</p>
+                    <p>+880 1611-576970</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <div class="contact-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <div>
+                    <small>EMAIL</small>
+                    <p>kushtiawushukungfu2025@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="contact-card reveal">
+
+              <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227.9685843245269!2d89.1253028064966!3d23.907436497349916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe97d7ccdf4e4b%3A0xac884ed79fc00314!2z4KaG4Kao4Kao4KeN4KamIOCmquCmvuCmoOCmtuCmvuCmsuCmviAoQW5hbmRhIFBhdGhzaGFsYSk!5e0!3m2!1sen!2sbd!4v1786389046531!5m2!1sen!2sbd" width="600" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe> -->
+
+              <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227.9685843245269!2d89.1253028064966!3d23.907436497349916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe97d7ccdf4e4b%3A0xac884ed79fc00314!2z4KaG4Kao4Kao4KeN4KamIOCmquCmvuCmoOCmtuCmvuCmsuCmviAoQW5hbmRhIFBhdGhzaGFsYSk!5e0!3m2!1sen!2sbd!4v1786389046531!5m2!1sen!2sbd"
+  style="border:0;"
+  allowfullscreen
+  loading="lazy"
+  referrerpolicy="strict-origin-when-cross-origin">
+</iframe>
+              <!-- <form id="contactForm">
+                <div class="field-row">
+                  <div class="field">
+                    <label>Name</label
+                    ><input
+                      id="name"
+                      type="text"
+                      placeholder="Your name"
+                      required
+                    />
+                  </div>
+                  <div class="field">
+                    <label>Phone</label
+                    ><input
+                      id="phone"
+                      type="tel"
+                      placeholder="Your phone"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Email</label
+                  ><input id="email" type="email" placeholder="Your email" />
+                </div>
+                <div class="field">
+                  <label>Message</label
+                  ><textarea
+                    id="message"
+                    rows="5"
+                    placeholder="Write your message..."
+                    required
+                  ></textarea>
+                </div>
+                <button class="unique-btn primary-btn" type="submit">
+                  Send Message <i class="fa-solid fa-paper-plane"></i>
+                </button>
+                <div id="formMessage"></div> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-top">
+        <div class="footer-brand">
+          <img src="images/logo.png" alt="KWKMA Logo" />
+          <div>
+            <strong>KWKMA</strong>
+            <p>Kushtia Wushu Kung-Fu Martial Art Academy</p>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#teacher">Teacher</a><a href="#beltRanking">Belt Ranking</a
+          ><a href="#classFees">Classes & Fees</a><a href="#gallery">Gallery</a>
+          <a href="#contact">Contact</a>
+          <a href="./admin.html">Admin</a>
+        </div>
+
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <div>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <span>© <span id="year"></span> KWKMA. All Rights Reserved.</span>
+        <span>Martial Arts • Discipline • Confidence</span>
+      </div>
+    </footer>
+
+    <!-- Back To Top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- =====================================================
+     FULLSCREEN GALLERY VIEWER
+===================================================== -->
+
+<div
+  class="gallery-viewer"
+  id="galleryViewer"
+  aria-hidden="true"
+>
+
+  <!-- IMAGE STAGE -->
+  <div
+    class="gallery-viewer-stage"
+    id="galleryViewerStage"
+  >
+    <img
+      class="gallery-viewer-image"
+      id="galleryViewerImage"
+      src=""
+      alt="Gallery Photo"
+      draggable="false"
+    />
+  </div>
+
+  <!-- CLOSE -->
+  <button
+    type="button"
+    class="gallery-viewer-close"
+    id="galleryViewerClose"
+    aria-label="Close viewer"
+  >
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <!-- PREVIOUS -->
+  <button
+    type="button"
+    class="gallery-viewer-prev"
+    id="galleryViewerPrev"
+    aria-label="Previous photo"
+  >
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <!-- NEXT -->
+  <button
+    type="button"
+    class="gallery-viewer-next"
+    id="galleryViewerNext"
+    aria-label="Next photo"
+  >
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+  <!-- CONTROLS -->
+  <div class="gallery-viewer-controls">
+
+    <button
+      type="button"
+      id="galleryZoomOut"
+      aria-label="Zoom out"
+    >
+      <i class="fa-solid fa-minus"></i>
+    </button>
+
+    <span
+      class="gallery-viewer-zoom-level"
+      id="galleryZoomLevel"
+    >
+      100%
+    </span>
+
+    <button
+      type="button"
+      id="galleryZoomIn"
+      aria-label="Zoom in"
+    >
+      <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <button
+      type="button"
+      id="galleryZoomReset"
+      aria-label="Reset zoom"
+    >
+      <i class="fa-solid fa-rotate-left"></i>
+    </button>
+
+    <button
+      type="button"
+      id="galleryFullscreen"
+      aria-label="Fullscreen"
+    >
+      <i class="fa-solid fa-expand"></i>
+    </button>
+
+  </div>
+
+</div>
+
+<script src="js/script.js"></script>
+<script type="module" src="js/gallery-home.js"></script>
+    
+  </body>
+</html>

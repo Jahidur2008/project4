@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admission List | KWKMA Admin</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/admission-list.css" />
+  </head>
+
+  <body>
+    <!-- =========================================
+     SIDEBAR start
+========================================= -->
+
+    <div id="commonSidebar"></div>
+
+    <!-- =========================================
+     SIDEBAR End
+========================================= -->
+
+    <!-- =========================================
+     MAIN
+========================================= -->
+
+    <main class="main-content">
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+        <div class="top-left">
+          <button class="mobile-menu" id="mobileMenu">☰</button>
+
+          <div>
+            <div class="page-label">STUDENT MANAGEMENT</div>
+
+            <h1>Admission List</h1>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <div class="system-status">
+            <span></span>
+
+            Firebase Connected
+          </div>
+        </div>
+      </header>
+
+      <!-- =====================================
+         PAGE CONTENT
+    ====================================== -->
+
+      <section class="page-content">
+        <div class="page-heading">
+          <div>
+            <div class="section-label">PENDING ADMISSIONS</div>
+
+            <h2>Admission Applications</h2>
+
+            <p>Review, approve or reject student applications.</p>
+          </div>
+
+          <div style="display: flex; gap: 8px">
+            <button class="allApproveBtn" id="allApproveBtn">
+              ✓ All Approve
+            </button>
+
+            <button class="refresh-btn" id="refreshBtn">↻ Refresh</button>
+          </div>
+        </div>
+
+        <!-- =================================
+             STATS
+        ================================== -->
+
+        <div class="mini-stats">
+          <div class="mini-card">
+            <div class="mini-icon">📝</div>
+
+            <div>
+              <span> Pending </span>
+
+              <strong id="pendingCount"> 0 </strong>
+            </div>
+          </div>
+
+          <div class="mini-card approved-card">
+            <div class="mini-icon">✓</div>
+
+            <div>
+              <span> Approved </span>
+
+              <strong id="approvedCount"> 0 </strong>
+            </div>
+          </div>
+
+          <div class="mini-card rejected-card">
+            <div class="mini-icon">×</div>
+
+            <div>
+              <span> Rejected </span>
+
+              <strong id="rejectedCount"> 0 </strong>
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-icon">✕</div>
+
+            <div>
+              <span>Canceled Students</span>
+
+              <strong id="canceledCount">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================
+             TABLE
+        ================================== -->
+
+        <div class="table-card">
+          <div class="table-header">
+            <div>
+              <h3>Admission Applications</h3>
+
+              <span id="tableStatus"> Loading admissions... </span>
+            </div>
+
+            <div class="table-search">
+              <input
+                type="search"
+                id="searchInput"
+                placeholder="Search registration ID or name..."
+              />
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Registration ID</th>
+
+                  <th>Student Name</th>
+
+                  <th>Father's Name</th>
+
+                  <th>Mother's Name</th>
+
+                  <th>Gender</th>
+
+                  <th>Date of Birth</th>
+
+                  <th>Phone Number</th>
+
+                  <th>Admission Date</th>
+
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="admissionTableBody"></tbody>
+            </table>
+
+            <!-- EMPTY -->
+
+            <div class="empty-state hidden" id="emptyState">
+              <div class="empty-icon">📋</div>
+
+              <h3>No Pending Admissions</h3>
+
+              <p>There are currently no pending admission applications.</p>
+            </div>
+
+            <!-- LOADING -->
+
+            <div class="loading-state" id="loadingState">
+              <div class="loader"></div>
+
+              <p>Loading admissions...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <<!-- =========================================
+     ADVANCED STUDENT PROFILE MODAL
+========================================== -->
+    <div id="studentModal" class="modal-overlay hidden">
+      <div class="student-modal">
+        <!-- TOP ACCENT -->
+        <div class="modal-accent"></div>
+
+        <!-- CLOSE -->
+        <button
+          class="modal-close"
+          id="modalClose"
+          type="button"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+        <!-- HEADER -->
+        <div class="modal-header">
+          <div>
+            <span class="modal-eyebrow"> KWKMA • STUDENT PROFILE </span>
+
+            <div class="modal-id-row">
+              <h2 id="modalRegistrationNo">KWKMA-01</h2>
+
+              <span class="modal-status approved" id="modalStatus">
+                ✓ APPROVED
+              </span>
+            </div>
+
+            <p class="modal-header-subtitle">
+              Official student information & martial arts profile
+            </p>
+          </div>
+        </div>
+
+        <!-- PROFILE HERO -->
+        <div class="student-profile">
+          <div class="modal-photo-box">
+            <img id="modalStudentPhoto" src="" alt="Student Photo" />
+
+            <div class="modal-photo-placeholder">
+              <i class="fa-solid fa-user"></i>
+              <span>NO PHOTO</span>
+            </div>
+          </div>
+
+          <div class="profile-info">
+            <div class="profile-name-row">
+              <div>
+                <span class="profile-label">STUDENT NAME</span>
+
+                <h3 id="modalStudentName">STUDENT NAME</h3>
+
+                <p>
+                  <i class="fa-solid fa-shield-halved"></i>
+                  KWKMA Registered Student
+                </p>
+              </div>
+            </div>
+
+            <!-- BELT -->
+            <div class="current-belt-card">
+              <div class="belt-icon">
+                <i class="fa-solid fa-medal"></i>
+              </div>
+
+              <div>
+                <span>CURRENT BELT</span>
+
+                <strong id="modalCurrentBelt"> - </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PERSONAL INFORMATION -->
+        <div class="details-section">
+          <div class="details-title">
+            <i class="fa-solid fa-user"></i>
+            PERSONAL INFORMATION
+          </div>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <span>Father's Name</span>
+              <strong id="modalFatherName">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Mother's Name</span>
+              <strong id="modalMotherName">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Gender</span>
+              <strong id="modalGender">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Date of Birth</span>
+              <strong id="modalDob">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Blood Group</span>
+              <strong id="modalBlood">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Religion</span>
+              <strong id="modalReligion">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Nationality</span>
+              <strong id="modalNationality">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Mobile Number</span>
+              <strong id="modalMobile">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Email</span>
+              <strong id="modalEmail">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Education</span>
+              <strong id="modalEducation">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Occupation</span>
+              <strong id="modalOccupation">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Marital Status</span>
+              <strong id="modalMarital">-</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADDRESS -->
+        <div class="details-section">
+          <div class="details-title">
+            <i class="fa-solid fa-location-dot"></i>
+            ADDRESS INFORMATION
+          </div>
+
+          <div class="address-grid">
+            <div class="address-item">
+              <span>
+                <i class="fa-solid fa-location-crosshairs"></i>
+                Present Address
+              </span>
+
+              <p id="modalPresentAddress">-</p>
+            </div>
+
+            <div class="address-item">
+              <span>
+                <i class="fa-solid fa-house"></i>
+                Permanent Address
+              </span>
+
+              <p id="modalPermanentAddress">-</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MARTIAL ARTS -->
+        <div class="details-section">
+          <div class="details-title">
+            <i class="fa-solid fa-person-running"></i>
+            MARTIAL ARTS INFORMATION
+          </div>
+
+          <div class="details-grid">
+            <div class="detail-item belt-detail">
+              <span>Current Belt</span>
+
+              <strong id="modalBeltDisplay"> - </strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Previous Experience</span>
+              <strong id="modalExperience">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Previous Belt Rank</span>
+              <strong id="modalBelt">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Training</span>
+              <strong id="modalTraining">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Contribution</span>
+              <strong id="modalContribution">-</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="modal-actions">
+          <div class="actions-heading">
+            <span>STUDENT ACTIONS</span>
+            <small>Manage student documents</small>
+          </div>
+
+          <div class="action-buttons">
+            <!-- EDIT -->
+            <button
+              type="button"
+              class="profile-action edit-action"
+              id="editStudentBtn"
+            >
+              <span class="action-icon">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </span>
+
+              <span class="action-text">
+                <strong>Edit Student</strong>
+                <small>Update information</small>
+              </span>
+
+              <i class="fa-solid fa-chevron-right action-arrow"></i>
+            </button>
+
+            <!-- ID CARD -->
+            <button
+              type="button"
+              class="profile-action id-card-action"
+              id="idCardBtn"
+            >
+              <span class="action-icon">
+                <i class="fa-solid fa-id-card"></i>
+              </span>
+
+              <span class="action-text">
+                <strong>ID Card</strong>
+                <small>View student ID card</small>
+              </span>
+
+              <i class="fa-solid fa-chevron-right action-arrow"></i>
+            </button>
+
+            <!-- CERTIFICATE -->
+            <button
+              type="button"
+              class="profile-action certificate-action"
+              id="certificateBtn"
+            >
+              <span class="action-icon">
+                <i class="fa-solid fa-certificate"></i>
+              </span>
+
+              <span class="action-text">
+                <strong>Certificate</strong>
+                <small>View student certificate</small>
+              </span>
+
+              <i class="fa-solid fa-chevron-right action-arrow"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="modal-footer">
+          <div class="footer-left">
+            <span>REGISTRATION STATUS</span>
+
+            <strong>
+              <i class="fa-solid fa-circle-check"></i>
+              APPROVED STUDENT
+            </strong>
+          </div>
+
+          <div class="footer-right">
+            <span>KWKMA</span>
+            <small>Kushtia Wushu Kung-Fu Martial Art Academy</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/common-sidebar.js"></script>
+    <script type="module" src="./js/admission-list.js"></script>
+  </body>
+</html>

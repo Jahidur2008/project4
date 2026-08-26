@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Black Belt | KWKMA Admin</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/total-students.css" />
+    <link rel="stylesheet" href="./css/black-belt.css" />
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <div id="commonSidebar"></div>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="top-left">
+          <button class="mobile-menu" id="mobileMenu" type="button">☰</button>
+
+          <div>
+            <div class="page-label">STUDENT MANAGEMENT</div>
+            <h1>Black Belt</h1>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <div class="system-status">
+            <span></span>
+            Firebase Connected
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <section class="page-content">
+        <!-- HEADER -->
+        <div class="black-page-header">
+          <div>
+            <div class="section-label">BLACK BELT STUDENTS</div>
+
+            <h2>
+              <span class="belt-dot black"></span>
+              Black Belt
+            </h2>
+
+            <p>
+              Students who successfully completed their final Black Belt
+              examination are listed here.
+            </p>
+          </div>
+
+          <button class="refresh-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate"></i>
+            Refresh
+          </button>
+        </div>
+
+        <!-- STATS -->
+        <div class="black-stats">
+          <div class="black-stat">
+            <div class="black-stat-icon black-icon">
+              <i class="fa-solid fa-medal"></i>
+            </div>
+
+            <div>
+              <span>BLACK BELT STUDENTS</span>
+              <strong id="totalBlackStudents">0</strong>
+            </div>
+          </div>
+
+          <div class="black-stat">
+            <div class="black-stat-icon gold-icon">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+
+            <div>
+              <span>EXAM GIVEN</span>
+              <strong id="examGiven">0</strong>
+            </div>
+          </div>
+
+          <div class="black-stat">
+            <div class="black-stat-icon green-icon">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div>
+              <span>PASSED</span>
+              <strong id="passedCount">0</strong>
+            </div>
+          </div>
+
+          <div class="black-stat">
+            <div class="black-stat-icon dark-icon">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+
+            <div>
+              <span>TESTIMONIAL</span>
+              <strong id="testimonialCount">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-card">
+          <div class="table-header">
+            <div>
+              <h3>Black Belt Student List</h3>
+              <span id="tableStatus"> Loading students... </span>
+            </div>
+
+            <div class="table-search">
+              <input
+                type="search"
+                id="searchInput"
+                placeholder="Search registration ID, name or phone..."
+              />
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>SL</th>
+                  <th>Registration ID</th>
+                  <th>Student Name</th>
+                  <th>Phone Number</th>
+                  <th>Ongoing Belt</th>
+                  <th>Brown Belt Exam Mark</th>
+                  <th>Black Belt Exam Mark</th>
+                  <th>Result</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="blackBeltTableBody"></tbody>
+            </table>
+
+            <!-- EMPTY -->
+            <div class="empty-state hidden" id="emptyState">
+              <div class="empty-icon">⚫</div>
+
+              <h3>No Black Belt Students Found</h3>
+
+              <p>Students promoted to Black Belt will appear here.</p>
+            </div>
+
+            <!-- LOADING -->
+            <div class="loading-state hidden" id="loadingState">
+              <div class="loader"></div>
+              <p>Loading students...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =====================================================
+         EXAM MODAL
+    ====================================================== -->
+
+    <div class="modal" id="examModal">
+      <div class="modal-box">
+        <button type="button" class="exam-modal-close" id="examModalClose">
+          &times;
+        </button>
+
+        <div class="modal-icon black-modal-icon">
+          <i class="fa-solid fa-medal"></i>
+        </div>
+
+        <span class="section-label black-label"> BLACK BELT EXAMINATION </span>
+
+        <h3>Enter Exam Mark</h3>
+
+        <div class="exam-student">
+          <strong id="examStudentName">-</strong>
+          <span id="examRegistration">-</span>
+        </div>
+
+        <div class="current-belt-box black-current-belt">
+          <span>Current Belt</span>
+
+          <strong> ⚫ Black Belt </strong>
+        </div>
+
+        <label for="examMark"> Exam Mark </label>
+
+        <div class="mark-input">
+          <input
+            type="number"
+            id="examMark"
+            min="0"
+            max="100"
+            placeholder="Enter mark"
+          />
+
+          <span>/ 100</span>
+        </div>
+
+        <div class="result-preview" id="resultPreview">
+          Enter a mark to see result
+        </div>
+
+        <button
+          class="save-result-btn black-save-btn"
+          id="saveResultBtn"
+          type="button"
+        >
+          <i class="fa-solid fa-check"></i>
+          Save Result
+        </button>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         TESTIMONIAL MODAL
+    ====================================================== -->
+
+    <div class="testimonial-modal" id="testimonialModal">
+      <div class="testimonial-box">
+        <button
+          type="button"
+          class="testimonial-close"
+          id="testimonialModalClose"
+        >
+          &times;
+        </button>
+
+        <div class="testimonial-icon">
+          <i class="fa-solid fa-certificate"></i>
+        </div>
+
+        <span class="section-label black-label"> BLACK BELT TESTIMONIAL </span>
+
+        <h3>Get Testimonial</h3>
+
+        <div class="testimonial-student">
+          <strong id="testimonialStudentName">-</strong>
+          <span id="testimonialRegistration">-</span>
+        </div>
+
+        <label for="testimonialText"> Testimonial </label>
+
+        <textarea
+          id="testimonialText"
+          rows="6"
+          placeholder="Enter testimonial..."
+        ></textarea>
+
+        <button
+          type="button"
+          class="get-testimonial-btn"
+          id="getTestimonialBtn"
+        >
+          <i class="fa-solid fa-file-certificate"></i>
+          Generate Testimonial
+        </button>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         STUDENT PROFILE MODAL
+    ====================================================== -->
+
+    <div id="studentModal" class="modal-overlay hidden">
+      <div class="student-modal">
+        <button class="modal-close" id="studentModalClose">×</button>
+
+        <div class="modal-header">
+          <div>
+            <span>BLACK BELT STUDENT</span>
+
+            <h2 id="modalRegistrationNo">KWKMA-01</h2>
+          </div>
+
+          <div class="modal-status approved" id="modalStatus">BLACK BELT</div>
+        </div>
+
+        <div class="student-profile">
+          <div class="modal-photo-box">
+            <img id="modalStudentPhoto" src="" alt="Student Photo" />
+
+            <div class="modal-photo-placeholder">NO PHOTO</div>
+          </div>
+
+          <div class="profile-info">
+            <h3 id="modalStudentName">STUDENT NAME</h3>
+
+            <p>KWKMA Student</p>
+          </div>
+        </div>
+
+        <!-- PERSONAL INFORMATION -->
+
+        <div class="details-section">
+          <div class="details-title">PERSONAL INFORMATION</div>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <span>Father's Name</span>
+              <strong id="modalFatherName">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Mother's Name</span>
+              <strong id="modalMotherName">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Gender</span>
+              <strong id="modalGender">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Date of Birth</span>
+              <strong id="modalDob">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Blood Group</span>
+              <strong id="modalBlood">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Religion</span>
+              <strong id="modalReligion">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Nationality</span>
+              <strong id="modalNationality">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Mobile Number</span>
+              <strong id="modalMobile">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Email</span>
+              <strong id="modalEmail">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Education</span>
+              <strong id="modalEducation">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Occupation</span>
+              <strong id="modalOccupation">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Marital Status</span>
+              <strong id="modalMarital">-</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADDRESS -->
+
+        <div class="details-section">
+          <div class="details-title">ADDRESS INFORMATION</div>
+
+          <div class="address-grid">
+            <div class="address-item">
+              <span>Present Address</span>
+              <p id="modalPresentAddress">-</p>
+            </div>
+
+            <div class="address-item">
+              <span>Permanent Address</span>
+              <p id="modalPermanentAddress">-</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MARTIAL ARTS -->
+
+        <div class="details-section">
+          <div class="details-title">MARTIAL ARTS INFORMATION</div>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <span>Previous Experience</span>
+              <strong id="modalExperience">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Previous Belt Rank</span>
+              <strong id="modalBelt">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Training</span>
+              <strong id="modalTraining">-</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Contribution</span>
+              <strong id="modalContribution">-</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPTS -->
+
+    <script type="module" src="js/common-sidebar.js"></script>
+
+    <script type="module" src="./js/black-belt.js"></script>
+  </body>
+</html>

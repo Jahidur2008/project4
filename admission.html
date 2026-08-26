@@ -1,0 +1,1310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>KWKMA | Admission Application</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="./css/admission.css" />
+  </head>
+
+  <body>
+    <main class="admission-page">
+      <form id="admissionForm">
+        <!-- ================= HEADER ================= -->
+
+        <header class="admission-header">
+          <!-- Left Side -->
+          <a
+            style="display: inline-block; text-decoration: none"
+            href="./admission.html"
+          >
+            <div class="academy-brand">
+              <div class="brand-logo">
+                <img src="./images/logo.png" alt="KWKMA Logo" />
+              </div>
+
+              <div class="brand-text">
+                <h1>KWKMA</h1>
+
+                <p>KUSHTIA WUSHU KUNG-FU MARTIAL ART ACADEMY</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Center Title -->
+          <div class="application-title">
+            <span class="title-line"></span>
+
+            <div>
+              <span class="title-small"> STUDENT REGISTRATION </span>
+
+              <h2>
+                Admission
+                <span>Application</span>
+              </h2>
+            </div>
+
+            <span class="title-line"></span>
+          </div>
+
+          <!-- Registration Number -->
+          <div class="registration-box">
+            <span> REGISTRATION NO. </span>
+
+            <strong id="registrationNo"> KWKMA-01 </strong>
+          </div>
+        </header>
+
+        <!-- ================= STUDENT INFORMATION ================= -->
+
+        <section class="form-section student-info-section">
+          <div class="section-heading">
+            <div class="heading-icon">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+
+            <div>
+              <span>SECTION 01</span>
+              <h2>Student Information</h2>
+            </div>
+          </div>
+
+          <div class="student-info-layout">
+            <!-- LEFT : FORM -->
+            <div class="student-fields">
+              <!-- Full Name -->
+              <div class="form-group full-width">
+                <label>
+                  Full Name
+                  <span>*</span>
+                </label>
+
+                <div class="input-box">
+                  <i class="fa-solid fa-user"></i>
+
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter student's full name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Father -->
+              <div class="form-group">
+                <label>
+                  Father's Name
+                  <span>*</span>
+                </label>
+
+                <div class="input-box">
+                  <i class="fa-solid fa-user-tie"></i>
+
+                  <input
+                    type="text"
+                    id="fatherName"
+                    name="fatherName"
+                    placeholder="Father's name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Mother -->
+              <div class="form-group">
+                <label>
+                  Mother's Name
+                  <span>*</span>
+                </label>
+
+                <div class="input-box">
+                  <i class="fa-solid fa-user"></i>
+
+                  <input
+                    type="text"
+                    id="motherName"
+                    name="motherName"
+                    placeholder="Mother's name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Date -->
+<div class="form-group">
+    <label>
+        Date of Birth
+        <span>*</span>
+    </label>
+
+    <div class="kwkma-date-box">
+
+        <!-- Real value - JS/Firebase এর জন্য -->
+        <input
+            type="hidden"
+            id="dob"
+            name="dob"
+        />
+
+        <!-- Visible date field -->
+        <button
+            type="button"
+            class="kwkma-date-trigger"
+            id="dobTrigger"
+        >
+            <span id="dobText">Select Date of Birth</span>
+            <i class="fa-solid fa-calendar-days"></i>
+        </button>
+
+        <!-- Custom Calendar -->
+        <div
+            class="kwkma-calendar"
+            id="dobCalendar"
+        >
+            <div class="calendar-header">
+
+                <button
+                    type="button"
+                    id="dobPrev"
+                    class="calendar-nav"
+                >
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <div class="calendar-title">
+
+                    <button
+                        type="button"
+                        class="calendar-month-btn"
+                        id="dobMonthBtn"
+                    >
+                        <strong id="dobMonth"></strong>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="calendar-year-btn"
+                        id="dobYearBtn"
+                    >
+                        <span id="dobYear"></span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="dobNext"
+                    class="calendar-nav"
+                >
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+            </div>
+
+            <div class="calendar-weekdays">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+            </div>
+
+            <div
+                class="calendar-days"
+                id="dobDays"
+            ></div>
+
+            <div class="calendar-footer">
+
+                <button
+                    type="button"
+                    id="dobToday"
+                >
+                    Today
+                </button>
+
+                <button
+                    type="button"
+                    id="dobClear"
+                >
+                    Clear
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+              <!-- Gender -->
+              <div class="form-group">
+                <label>
+                  Gender
+                  <span>*</span>
+                </label>
+
+                <div class="custom-select" data-select="sex">
+                  <input type="hidden" id="sex" name="sex" required />
+
+                  <button type="button" class="select-trigger">
+                    <span class="select-icon">
+                      <i class="fa-solid fa-venus-mars"></i>
+                    </span>
+
+                    <span class="select-text"> Select Gender </span>
+
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </button>
+
+                  <div class="select-menu">
+                    <div class="select-option" data-value="Male">
+                      <span class="option-icon male">
+                        <i class="fa-solid fa-mars"></i>
+                      </span>
+
+                      <span>Male</span>
+                    </div>
+
+                    <div class="select-option" data-value="Female">
+                      <span class="option-icon female">
+                        <i class="fa-solid fa-venus"></i>
+                      </span>
+
+                      <span>Female</span>
+                    </div>
+
+                    <div class="select-option" data-value="Custom">
+                      <span class="option-icon custom">
+                        <i class="fa-solid fa-user"></i>
+                      </span>
+
+                      <span>Custom</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Blood Group -->
+              <div class="form-group">
+                <label>
+                  Blood Group
+                  <span>*</span>
+                </label>
+
+                <div class="custom-select" data-select="bloodGroup">
+                  <input
+                    type="hidden"
+                    id="bloodGroup"
+                    name="bloodGroup"
+                    required
+                  />
+
+                  <button type="button" class="select-trigger">
+                    <span class="select-icon blood">
+                      <i class="fa-solid fa-droplet"></i>
+                    </span>
+
+                    <span class="select-text"> Select Blood Group </span>
+
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </button>
+
+                  <div class="select-menu">
+                    <div class="select-option" data-value="A+">
+                      <span class="option-icon blood-option"> A+ </span>
+                      <span>A(+) Positive</span>
+                    </div>
+
+                    <div class="select-option" data-value="A-">
+                      <span class="option-icon blood-option"> A− </span>
+                      <span>A(-) Negative</span>
+                    </div>
+
+                    <div class="select-option" data-value="B+">
+                      <span class="option-icon blood-option"> B+ </span>
+                      <span>B(+) Positive</span>
+                    </div>
+
+                    <div class="select-option" data-value="B-">
+                      <span class="option-icon blood-option"> B− </span>
+                      <span>B(-) Negative</span>
+                    </div>
+
+                    <div class="select-option" data-value="AB+">
+                      <span class="option-icon blood-option"> AB+ </span>
+                      <span>AB(+) Positive</span>
+                    </div>
+
+                    <div class="select-option" data-value="AB-">
+                      <span class="option-icon blood-option"> AB− </span>
+                      <span>AB(-) Negative</span>
+                    </div>
+
+                    <div class="select-option" data-value="O+">
+                      <span class="option-icon blood-option"> O+ </span>
+                      <span>O(+) Positive</span>
+                    </div>
+
+                    <div class="select-option" data-value="O-">
+                      <span class="option-icon blood-option"> O− </span>
+                      <span>O(-) Negative</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Religion -->
+              <div class="form-group">
+                <label>
+                  Religion
+                  <span>*</span>
+                </label>
+
+                <div class="custom-select" data-select="religion">
+                  <input type="hidden" id="religion" name="religion" required />
+
+                  <button type="button" class="select-trigger">
+                    <span class="select-icon religion-icon">
+                      <i class="fa-solid fa-hands-praying"></i>
+                    </span>
+
+                    <span class="select-text"> Select Religion </span>
+
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                  </button>
+
+                  <div class="select-menu">
+                    <div class="select-option" data-value="Islam">
+                      <span class="option-icon religion-option">
+                        <i class="fa-solid fa-moon"></i>
+                      </span>
+                      <span>Islam</span>
+                    </div>
+
+                    <div class="select-option" data-value="Hindu">
+                      <span class="option-icon religion-option"> ॐ </span>
+                      <span>Hindu</span>
+                    </div>
+
+                    <div class="select-option" data-value="Christian">
+                      <span class="option-icon religion-option">
+                        <i class="fa-solid fa-cross"></i>
+                      </span>
+                      <span>Christian</span>
+                    </div>
+
+                    <div class="select-option" data-value="Buddho">
+                      <span class="option-icon religion-option"> ☸ </span>
+                      <span>Buddho</span>
+                    </div>
+
+                    <div class="select-option" data-value="Other">
+                      <span class="option-icon religion-option">
+                        <i class="fa-solid fa-ellipsis"></i>
+                      </span>
+                      <span>Other</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT : PHOTO PREVIEW -->
+            <div class="student-side-photo">
+              <div class="side-photo-card" style="text-align: center">
+                <div class="side-photo-top">
+                  <span>STUDENT PHOTO</span>
+
+                  <i class="fa-solid fa-camera"></i>
+                </div>
+
+                <div class="side-photo-box">
+                  <img id="studentPhoto" src="" alt="Student Photo" />
+
+                  <div class="side-photo-placeholder" id="photoPlaceholder">
+                    <i class="fa-solid fa-user"></i>
+
+                    <span>PHOTO</span>
+
+                    <small> Upload from above </small>
+                  </div>
+                </div>
+
+                <div class="side-photo-status">
+                  <i class="fa-solid fa-circle-check"></i>
+
+                  <span>Live Preview</span>
+                </div>
+
+<input
+    type="file"
+    id="photo"
+    accept="image/*"
+    hidden
+>
+                <label for="photo" class="choose-photo-btn">
+                  <i class="fa-solid fa-camera"></i>
+                  Choose File
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- ================= PERSONAL INFORMATION ================= -->
+
+          <div class="student-fields personal-fields">
+            <!-- Nationality -->
+            <div class="form-group">
+              <label>Nationality</label>
+
+              <div class="input-box nationality-box">
+                <i class="fa-solid fa-flag"></i>
+
+                <input
+                  type="text"
+                  id="nationality"
+                  name="nationality"
+                  value="Bangladeshi"
+                  readonly
+                />
+
+                <i class="fa-solid fa-lock nationality-lock"></i>
+              </div>
+            </div>
+            
+            <!-- Father's Occupation -->
+            <div class="form-group">
+              <label>Father's Occupation</label>
+
+              <div class="input-box">
+                <i class="fa-solid fa-briefcase"></i>
+
+                <input
+                  type="text"
+                  id="occupation"
+                  name="occupation"
+                  placeholder="Father's occupation"
+                />
+              </div>
+            </div>
+            <!-- Previous Martial Arts Experience -->
+<div class="form-group">
+  <label>
+    Previous Martial Arts Experience
+    <span>*</span>
+  </label>
+
+  <div class="custom-select" data-select="martialArtsExperience">
+    <input
+      type="hidden"
+      id="martialArtsExperience"
+      name="martialArtsExperience"
+      required
+    />
+
+    <button type="button" class="select-trigger">
+      <span class="select-icon">
+        <i class="fa-solid fa-hand-fist"></i>
+      </span>
+
+      <span class="select-text">
+        Select Experience
+      </span>
+
+      <i class="fa-solid fa-chevron-down select-arrow"></i>
+    </button>
+
+    <div class="select-menu">
+
+      <div class="select-option" data-value="No Experience">
+        <span class="option-icon">
+          <i class="fa-solid fa-user"></i>
+        </span>
+        <span>No Experience</span>
+      </div>
+
+      <div class="select-option" data-value="Less than 1 Year">
+        <span class="option-icon">
+          <i class="fa-solid fa-clock"></i>
+        </span>
+        <span>Less than 1 Year</span>
+      </div>
+
+      <div class="select-option" data-value="1-2 Years">
+        <span class="option-icon">
+          <i class="fa-solid fa-medal"></i>
+        </span>
+        <span>1–2 Years</span>
+      </div>
+
+      <div class="select-option" data-value="2-5 Years">
+        <span class="option-icon">
+          <i class="fa-solid fa-medal"></i>
+        </span>
+        <span>2–5 Years</span>
+      </div>
+
+      <div class="select-option" data-value="5+ Years">
+        <span class="option-icon">
+          <i class="fa-solid fa-trophy"></i>
+        </span>
+        <span>5+ Years</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Previous Belt / Rank -->
+<div class="form-group">
+  <label>
+    Previous Belt / Rank
+  </label>
+
+  <div class="custom-select" data-select="previousRank">
+    <input
+      type="hidden"
+      id="previousRank"
+      name="previousRank"
+    />
+
+    <button type="button" class="select-trigger">
+      <span class="select-icon">
+        <i class="fa-solid fa-award"></i>
+      </span>
+
+      <span class="select-text">
+        Select Previous Belt / Rank
+      </span>
+
+      <i class="fa-solid fa-chevron-down select-arrow"></i>
+    </button>
+
+    <div class="select-menu">
+
+      <div class="select-option" data-value="None">
+        <span class="option-icon">
+          <i class="fa-solid fa-minus"></i>
+        </span>
+        <span>None</span>
+      </div>
+
+      <div class="select-option" data-value="White Belt">
+        <span class="option-icon">
+          <i class="fa-solid fa-circle"></i>
+        </span>
+        <span>White Belt</span>
+      </div>
+
+      <div class="select-option" data-value="Yellow Belt">
+        <span class="option-icon">
+          <i class="fa-solid fa-circle"></i>
+        </span>
+        <span>Yellow Belt</span>
+      </div>
+
+      <div class="select-option" data-value="Green Belt">
+        <span class="option-icon">
+          <i class="fa-solid fa-circle"></i>
+        </span>
+        <span>Green Belt</span>
+      </div>
+
+      <div class="select-option" data-value="Blue Belt">
+        <span class="option-icon">
+          <i class="fa-solid fa-circle"></i>
+        </span>
+        <span>Blue Belt</span>
+      </div>
+
+      <div class="select-option" data-value="Red Belt">
+        <span class="option-icon">
+          <i class="fa-solid fa-circle"></i>
+        </span>
+        <span>Red Belt</span>
+      </div>
+
+      <div class="select-option" data-value="Black Belt">
+        <span class="option-icon">
+          <i class="fa-solid fa-star"></i>
+        </span>
+        <span>Black Belt</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+            <!-- Mobile No -->
+            <div class="form-group">
+              <label>
+                Mobile No
+                <span>*</span>
+              </label>
+
+              <div class="input-box">
+                <i class="fa-solid fa-phone"></i>
+
+                <input
+                  type="tel"
+                  id="mobile"
+                  name="mobile"
+                  placeholder="Enter mobile number"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label>Email</label>
+
+              <div class="input-box">
+                <i class="fa-solid fa-envelope"></i>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter email address"
+                />
+              </div>
+            </div>
+
+            <!-- Education Qualification -->
+            <div class="form-group">
+              <label>
+                Education Qualification
+                <span>*</span>
+              </label>
+
+              <div class="input-box">
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <input
+                  type="text"
+                  id="education"
+                  name="education"
+                  placeholder="Enter education qualification"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Marital Status -->
+            <div class="form-group">
+              <label>Marital Status</label>
+
+              <div class="custom-select" data-select="maritalStatus">
+                <input type="hidden" id="maritalStatus" name="maritalStatus" />
+
+                <button type="button" class="select-trigger">
+                  <span class="select-icon">
+                    <i class="fa-solid fa-heart"></i>
+                  </span>
+
+                  <span class="select-text"> Select Marital Status </span>
+
+                  <i class="fa-solid fa-chevron-down select-arrow"></i>
+                </button>
+
+                <div class="select-menu">
+                  <div class="select-option" data-value="Single">
+                    <span class="option-icon">
+                      <i class="fa-solid fa-user"></i>
+                    </span>
+
+                    <span>Single</span>
+                  </div>
+
+                  <div class="select-option" data-value="Married">
+                    <span class="option-icon">
+                      <i class="fa-solid fa-heart"></i>
+                    </span>
+
+                    <span>Married</span>
+                  </div>
+
+                  <div class="select-option" data-value="Other">
+                    <span class="option-icon">
+                      <i class="fa-solid fa-ellipsis"></i>
+                    </span>
+
+                    <span>Other</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Present Address -->
+            <div class="form-group">
+              <label>
+                Present Address
+                <span>*</span>
+              </label>
+
+              <div class="input-box textarea-box">
+                <i class="fa-solid fa-location-dot"></i>
+
+                <textarea
+                  id="presentAddress"
+                  name="presentAddress"
+                  placeholder="Enter present address"
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Permanent Address -->
+            <div class="form-group">
+              <label>
+                Permanent Address
+                <span>*</span>
+              </label>
+
+              <div class="input-box textarea-box">
+                <i class="fa-solid fa-location-dot"></i>
+
+                <textarea
+                  id="permanentAddress"
+                  name="permanentAddress"
+                  placeholder="Enter permanent address"
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Same Address -->
+              <label class="same-address">
+                <input type="checkbox" id="sameAsPresent" />
+
+                <span class="checkmark"></span>
+
+                <span> Same as Present Address </span>
+              </label>
+            </div>
+          </div>
+        </section>
+        <!-- =========================================
+     TRAINING EVENT
+========================================= -->
+
+        <section class="training-event-section">
+          <!-- Training Event Heading -->
+          <div class="training-event-title">
+            <span class="training-title-line"></span>
+
+            <div>
+              <span class="training-title-small">K.W.K.M.A PROGRAM</span>
+              <h2>TRAINING <span>EVENT</span></h2>
+            </div>
+
+            <span class="training-title-line"></span>
+          </div>
+
+          <!-- Training Options Table -->
+          <div class="training-table">
+            <!-- Row 1 -->
+            <label class="training-option">
+              <input type="checkbox" name="training" value="Physical Fitness" />
+
+              <span class="training-checkmark"></span>
+
+              <span>Physical Fitness</span>
+            </label>
+
+            <label class="training-option">
+              <input
+                type="checkbox"
+                name="training"
+                value="Wushu Kung-fu Long Training (Red to Black Belt)"
+              />
+
+              <span class="training-checkmark"></span>
+
+              <span> Wushu Kung-fu Long Training (Red to Black Belt) </span>
+            </label>
+
+            <!-- Row 2 -->
+            <label class="training-option">
+              <input
+                type="checkbox"
+                name="training"
+                value="Wushu Kung-fu Self Defence"
+              />
+
+              <span class="training-checkmark"></span>
+
+              <span> Wushu Kung-fu Self Defence </span>
+            </label>
+
+            <label class="training-option">
+              <input
+                type="checkbox"
+                name="training"
+                value="Woman Wushu Kung-fu Self Defence"
+              />
+
+              <span class="training-checkmark"></span>
+
+              <span> Woman Wushu Kung-fu Self Defence </span>
+            </label>
+
+            <!-- Row 3 -->
+            <label class="training-option">
+              <input type="checkbox" name="training" value="Taijiquan" />
+
+              <span class="training-checkmark"></span>
+
+              <span>Taijiquan</span>
+            </label>
+
+            <label class="training-option">
+              <input
+                type="checkbox"
+                name="training"
+                value="Wushu Kung-fu Diploma (3, 6 month & 1, 2, 3 years)"
+              />
+
+              <span class="training-checkmark"></span>
+
+              <span>
+                Wushu Kung-fu Diploma (3, 6 month &amp; 1, 2, 3 years)
+              </span>
+            </label>
+
+            <!-- Row 4 -->
+            <label class="training-option">
+              <input
+                type="checkbox"
+                name="training"
+                value="Wushu Kung-fu Referee & Judges (3, 6 Months)"
+              />
+
+              <span class="training-checkmark"></span>
+
+              <span> Wushu Kung-fu Referee &amp; Judges (3, 6 Months) </span>
+            </label>
+
+            <label class="training-option">
+              <input
+                type="checkbox"
+                name="training"
+                value="Wushu Kung-fu Teacher & Instructor (1, 2 Years)"
+              />
+
+              <span class="training-checkmark"></span>
+
+              <span> Wushu Kung-fu Teacher &amp; Instructor (1, 2 Years) </span>
+            </label>
+          </div>
+
+          <!-- =========================================
+       CONTRIBUTION
+  ========================================= -->
+
+          <div class="contribution-box">
+            <h3>
+              I would like to make a contribute to the
+              <span>K.W.K.M.A.</span>
+            </h3>
+
+            <div class="contribution-options">
+              <label>
+                <input type="radio" name="contribution" value="1000" />
+                <span class="contribution-check"></span>
+                <span>1000</span>
+              </label>
+
+              <label>
+                <input type="radio" name="contribution" value="1500" />
+                <span class="contribution-check"></span>
+                <span>1500</span>
+              </label>
+
+              <label>
+                <input type="radio" name="contribution" value="2000" />
+                <span class="contribution-check"></span>
+                <span>2000</span>
+              </label>
+
+              <label>
+                <input type="radio" name="contribution" value="3000" />
+                <span class="contribution-check"></span>
+                <span>3000</span>
+              </label>
+
+              <label>
+                <input type="radio" name="contribution" value="3500" />
+                <span class="contribution-check"></span>
+                <span>3500</span>
+              </label>
+
+              <label>
+                <input type="radio" name="contribution" value="4000" />
+                <span class="contribution-check"></span>
+                <span>4000</span>
+              </label>
+
+              <label>
+                <input type="radio" name="contribution" value="5000" />
+                <span class="contribution-check"></span>
+                <span>5000</span>
+              </label>
+
+              <label>
+                <input type="radio" name="contribution" value="10000" />
+                <span class="contribution-check"></span>
+                <span>10,000</span>
+              </label>
+
+              <label>
+                <input type="radio" name="contribution" value="Other" />
+                <span class="contribution-check"></span>
+                <span>Other</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- =========================================
+       OATH
+  ========================================= -->
+
+          <div class="training-oath">
+            <p>
+              <strong>Oath:</strong>
+              I do hereby Promise that I will Abide by the creed &amp;
+              Discipline of K.W.K.M.A. Rules &amp; Regulation will not misuse my
+              martial art Power except for Self Defence. My work will all ways
+              for country and my soul will all ways line with truth and peace.
+            </p>
+          </div>
+
+          <!-- =========================================
+       SIGNATURE
+  ========================================= -->
+
+          <div class="applicant-signature">
+            <span>Applicant’s Signature:</span>
+
+            <div class="signature-line"></div>
+          </div>
+          <!-- ================= GUARDIAN DECLARATION ================= -->
+
+          <div class="guardian-declaration">
+            <p style="display: inline-block;">
+              I <div style="display: inline-block; margin-left: 5px;" class="signature-line"></div> do hereby my ward for the training of Wushu
+              (Martial Art) Under supervision of K.W.K.M.A.
+            </p>
+
+            <div class="guardian-signature">
+              <strong>Guardian's Signature:</strong>
+               <div class="signature-line"></div>
+            </div>
+          </div>
+          <!-- ================= SUBMIT SECTION ================= -->
+
+          <div class="submit-section">
+
+              <button type="submit" id="submitBtn" class="submit-btn">
+              <i class="fa-solid fa-paper-plane"></i>
+              SUBMIT ADMISSION
+              </button>
+
+              <div id="message" class="form-message"></div>
+              <a style="display: inline-block; text-decoration: none; font-size: 12px;" href="./index.html">Back to Home? Click Me.</a>
+
+          </div>
+                  
+
+          
+          
+        </section>
+
+      </form>
+      <!-- ================= REGISTRATION POPUP ================= -->
+
+<div id="registrationResult" class="registration-modal hidden">
+
+    <div class="registration-modal-overlay"></div>
+
+    <div class="registration-modal-box">
+
+        <!-- TOP BAR -->
+        <div class="registration-modal-header">
+            <div>
+                <span>KWKMA</span>
+                <h2>ADMISSION REGISTRATION</h2>
+            </div>
+
+            <button type="button" id="closeRegistration" class="modal-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+
+        <!-- PRINT DOCUMENT -->
+        <div id="registrationCopy" class="registration-document">
+
+            <!-- DOCUMENT HEADER -->
+
+            <div class="document-header">
+
+                <div class="document-brand">
+                    <img src="./images/logo.png" alt="KWKMA Logo">
+
+                    <div>
+                        <h1>KWKMA</h1>
+                        <p>KUSHTIA WUSHU KUNG-FU MARTIAL ART ACADEMY</p>
+                    </div>
+                </div>
+
+                <div class="document-title">
+                    <span>STUDENT REGISTRATION</span>
+                    <h2>ADMISSION APPLICATION</h2>
+                </div>
+
+                <div class="document-reg">
+                    <small>REGISTRATION NO.</small>
+                    <strong id="resultRegNo">KWKMA-01</strong>
+                </div>
+
+            </div>
+
+
+            <!-- STUDENT INFORMATION -->
+
+            <div class="document-section-title">
+                <i class="fa-solid fa-user-graduate"></i>
+                STUDENT INFORMATION
+            </div>
+
+
+            <div class="document-body-grid">
+
+                <div class="document-fields">
+
+                    <div class="result-field">
+                        <span>FULL NAME</span>
+                        <strong id="resultName">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>FATHER'S NAME</span>
+                        <strong id="resultFather">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>MOTHER'S NAME</span>
+                        <strong id="resultMother">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>DATE OF BIRTH</span>
+                        <strong id="resultDob">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>GENDER</span>
+                        <strong id="resultSex">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>BLOOD GROUP</span>
+                        <strong id="resultBlood">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>RELIGION</span>
+                        <strong id="resultReligion">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>NATIONALITY</span>
+                        <strong id="resultNationality">Bangladeshi</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>FATHER'S OCCUPATION</span>
+                        <strong id="resultOccupation">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>MOBILE NO</span>
+                        <strong id="resultMobile">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>EMAIL</span>
+                        <strong id="resultEmail">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>EDUCATION QUALIFICATION</span>
+                        <strong id="resultEducation">-</strong>
+                    </div>
+
+                    <div class="result-field">
+                        <span>MARITAL STATUS</span>
+                        <strong id="resultMarital">-</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- PHOTO -->
+
+                <div class="result-photo-box">
+                    <img id="resultPhoto" src="" alt="Student Photo">
+                    <span>STUDENT PHOTO</span>
+                </div>
+
+            </div>
+
+
+            <!-- ADDRESS -->
+
+            <div class="document-address-grid">
+
+                <div class="result-address">
+                    <span>PRESENT ADDRESS</span>
+                    <p id="resultPresent">-</p>
+                </div>
+
+                <div class="result-address">
+                    <span>PERMANENT ADDRESS</span>
+                    <p id="resultPermanent">-</p>
+                </div>
+
+            </div>
+
+
+            <!-- TRAINING EVENT -->
+
+            <div class="document-section-title">
+                <i class="fa-solid fa-dumbbell"></i>
+                TRAINING EVENT
+            </div>
+
+            <div class="result-training">
+                <p id="resultTraining">-</p>
+            </div>
+
+
+            <!-- PREVIOUS EXPERIENCE -->
+
+            <div class="document-extra-grid">
+
+                <div class="result-field">
+                    <span>PREVIOUS MARTIAL ARTS EXPERIENCE</span>
+                    <strong id="resultExperience">-</strong>
+                </div>
+
+                <div class="result-field">
+                    <span>PREVIOUS BELT RANK</span>
+                    <strong id="resultBeltRank">-</strong>
+                </div>
+
+                <div class="result-field">
+                    <span>CONTRIBUTION</span>
+                    <strong id="resultContribution">-</strong>
+                </div>
+
+            </div>
+
+
+            <!-- DECLARATION -->
+
+            <div class="document-declaration">
+
+                <div class="document-section-title">
+                    <i class="fa-solid fa-file-signature"></i>
+                    DECLARATION
+                </div>
+
+                <p>
+                    I hereby declare that all the information provided
+                    in this application is true and correct. I agree to
+                    follow all rules and regulations of KUSHTIA WUSHU
+                    KUNG-FU MARTIAL ART ACADEMY.
+                </p>
+
+            </div>
+
+
+            <!-- SIGNATURE -->
+
+            <div class="document-signatures">
+
+                <div>
+                    <div class="signature-line"></div>
+                    <strong>APPLICANT'S SIGNATURE</strong>
+                </div>
+
+                <div>
+                    <div class="signature-line"></div>
+                    <strong>GUARDIAN'S SIGNATURE</strong>
+                </div>
+
+            </div>
+
+
+            <div class="document-footer">
+                <span>KWKMA • STUDENT REGISTRATION</span>
+                <span>OFFICIAL ADMISSION COPY</span>
+            </div>
+
+        </div>
+
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="registration-actions">
+
+            <button type="button"
+                    id="downloadPdf"
+                    class="print-btn">
+
+                <i class="fa-solid fa-print"></i>
+
+                PRINT DOCUMENT
+
+            </button>
+
+            <button type="button" id="backToAdmission" class="close-btn">
+              Close
+            </button>
+        </div>
+
+
+    </div>
+
+</div>
+    </main>
+
+    <script type="module" src="./js/admission.js"></script>
+  </body>
+</html>
