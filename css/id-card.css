@@ -108,7 +108,7 @@ body {
   margin: 0 auto;
   padding: 40px 24px 80px;
   display: grid;
-  grid-template-columns: 360px 1fr;
+  grid-template-columns: 401px 1fr;
   gap: 28px;
   align-items: start;
 }
@@ -199,13 +199,13 @@ body {
 .btn-row {
   display: flex;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: 30px;
   flex-wrap: wrap;
 }
 .btn {
   flex: 1;
   min-width: 140px;
-  padding: 12px 14px;
+  padding: 14px 14px;
   border-radius: 10px;
   border: 1px solid transparent;
   font-size: 14px;

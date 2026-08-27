@@ -1,3 +1,7 @@
+// =====================================================
+// SIDEBAR
+// =====================================================
+
 import { auth } from "./firebase.js";
 
 import {
@@ -72,17 +76,43 @@ function initializeSidebar() {
     const sidebarOverlay =
         document.getElementById("sidebarOverlay");
 
+
+    // =================================================
+    // STUDENT MANAGEMENT
+    // =================================================
+
     const studentMenuBtn =
         document.getElementById("studentMenuBtn");
 
     const studentSubmenu =
         document.getElementById("studentSubmenu");
 
+
+    // =================================================
+    // BELT RANKING
+    // =================================================
+
     const beltMenuBtn =
         document.getElementById("beltMenuBtn");
 
     const beltSubmenu =
         document.getElementById("beltSubmenu");
+
+
+    // =================================================
+    // ID CARD & CERTIFICATE
+    // =================================================
+
+    const idCardMenuBtn =
+        document.getElementById("idCardMenuBtn");
+
+    const idCardSubmenu =
+        document.getElementById("idCardSubmenu");
+
+
+    // =================================================
+    // LOGOUT
+    // =================================================
 
     const logoutBtn =
         document.getElementById("logoutBtn");
@@ -319,6 +349,35 @@ function initializeSidebar() {
 
 
     // =================================================
+    // ID CARD & CERTIFICATE
+    // =================================================
+
+    if (
+        idCardMenuBtn &&
+        idCardSubmenu
+    ) {
+
+        idCardMenuBtn.addEventListener(
+            "click",
+            (event) => {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                idCardMenuBtn.classList.toggle(
+                    "open"
+                );
+
+                idCardSubmenu.classList.toggle(
+                    "show"
+                );
+            }
+        );
+    }
+
+
+    // =================================================
     // REMOVE ACTIVE STATES
     // =================================================
 
@@ -489,6 +548,41 @@ function initializeSidebar() {
                     );
                 }
             }
+        );
+    }
+
+
+    // =================================================
+    // ID CARD & CERTIFICATE PAGES
+    // =================================================
+
+    const idCardPages = [
+
+        "id-card",
+
+        "certificate",
+
+        "testimonial"
+
+    ];
+
+
+    if (
+        idCardPages.includes(
+            currentPage
+        )
+    ) {
+
+        idCardMenuBtn?.classList.add(
+            "active"
+        );
+
+        idCardMenuBtn?.classList.add(
+            "open"
+        );
+
+        idCardSubmenu?.classList.add(
+            "show"
         );
     }
 
