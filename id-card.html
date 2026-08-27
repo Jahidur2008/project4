@@ -1,350 +1,136 @@
 <!doctype html>
-<html lang="en">
+<html lang="bn">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KWKMA — Student ID Card Generator</title>
 
-    <title>ID Card | KWKMA</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
 
+    <!-- FontAwesome (used by button icons inside id-card.js) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <!-- Fav -->
     <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
 
     <link rel="stylesheet" href="./css/id-card.css" />
   </head>
-
   <body>
-    <!-- =====================================================
-       MAIN
-  ====================================================== -->
-
-    <main class="id-card-page">
-      <!-- =====================================================
-         TOP BACK BUTTON
-    ====================================================== -->
-
-      <div class="top-page-actions">
-        <button type="button" id="backBtn" class="back-page-btn">
+    <header class="topbar">
+      <div class="top-left">
+        <button type="button" class="back-btn" id="backBtn">
           <i class="fa-solid fa-arrow-left"></i>
           Back
         </button>
+
+        <div>
+          <div class="page-label">KWKMA</div>
+
+          <h1>STUDENT ID CARD GENERATOR</h1>
+        </div>
       </div>
 
-      <!-- =====================================================
-         GENERATOR
-    ====================================================== -->
+      <div class="top-right">
+        <div class="system-status">
+          <span></span>
 
-      <section class="generator-card">
-        <!-- =================================================
-           HEADER
-      ================================================== -->
+          Firebase Connected
+        </div>
+      </div>
+    </header>
 
-        <div class="generator-heading">
-          <div class="heading-icon">
-            <i class="fa-solid fa-id-card"></i>
-          </div>
+    <main class="layout">
+      <!-- LEFT: lookup panel -->
+      <section class="panel form-panel">
+        <h2>রেজিস্ট্রেশন নম্বর দিন</h2>
+        <p class="hint">
+          Registration No. আর Validity দিয়ে Generate করুন — student এর তথ্য অটো
+          লোড হয়ে card এ বসে যাবে।
+        </p>
 
-          <div>
-            <span>KWKMA • STUDENT DOCUMENTS</span>
-
-            <h1>Student ID Card</h1>
-
-            <p>
-              Enter registration ID and validity to generate the official
-              student ID card.
-            </p>
-          </div>
+        <label class="field-label" for="registrationInput"
+          >Registration No.</label
+        >
+        <div class="reg-input-group">
+          <span class="reg-prefix">KWKMA-</span>
+          <input
+            type="text"
+            id="registrationInput"
+            placeholder="যেমন: 0125"
+            inputmode="numeric"
+            autocomplete="off"
+          />
         </div>
 
-        <!-- =================================================
-           INPUT AREA
-      ================================================== -->
+        <label class="field-label" for="validityInput" style="margin-top: 16px">
+          Validity
+        </label>
+        <input
+          type="text"
+          id="validityInput"
+          class="text-input"
+          placeholder="যেমন: 31/12/2026"
+          autocomplete="off"
+        />
 
-        <div class="input-row">
-          <!-- Registration -->
-
-          <div class="input-group">
-            <label for="registrationInput"> Registration ID </label>
-
-            <div class="input-box">
-              <i class="fa-solid fa-id-badge"></i>
-
-              <input
-                type="text"
-                id="registrationInput"
-                placeholder="KWKMA-01"
-                autocomplete="off"
-                inputmode="numeric"
-              />
-            </div>
-          </div>
-
-          <!-- Validity -->
-
-          <div class="input-group">
-            <label for="validityInput"> Validity </label>
-
-            <div class="input-box">
-              <i class="fa-solid fa-calendar-check"></i>
-
-              <input
-                type="text"
-                id="validityInput"
-                placeholder="31/12/2027"
-                autocomplete="off"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- =================================================
-           ACTION BUTTONS
-      ================================================== -->
-
-        <div class="generator-actions">
-          <button type="button" id="generateBtn" class="generate-btn">
+        <div class="btn-row">
+          <button id="generateBtn" class="btn btn-primary" type="button">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
             Generate ID Card
           </button>
-
-          <button type="button" id="refreshBtn" class="refresh-btn">
-            <i class="fa-solid fa-arrows-rotate"></i>
-            Refresh
-          </button>
-
-          <button type="button" id="resetBtn" class="reset-btn">
-            <i class="fa-solid fa-rotate-left"></i>
+          <button id="resetBtn" class="btn btn-ghost" type="button">
             Reset
           </button>
         </div>
 
-        <!-- Error / Success -->
-
-        <div id="messageBox" class="message-box hidden"></div>
+        <p id="messageBox" class="message-box hidden"></p>
       </section>
 
-      <!-- =====================================================
-         PREVIEW
-    ====================================================== -->
-
-      <section id="previewSection" class="preview-section hidden">
-        <div class="preview-heading">
-          <div>
-            <span>ID CARD PREVIEW</span>
-
-            <h2>Official Student ID Card</h2>
-          </div>
-
-          <div class="preview-actions">
-            <button
-              type="button"
-              id="downloadPngBtn"
-              class="download-btn png-btn"
-            >
-              <i class="fa-solid fa-image"></i>
-              Download PNG
-            </button>
-
-            <button
-              type="button"
-              id="downloadPdfBtn"
-              class="download-btn pdf-btn"
-            >
-              <i class="fa-solid fa-file-pdf"></i>
-              Download PDF
-            </button>
-          </div>
-        </div>
-
-        <!-- =================================================
-           CARDS
-      ================================================== -->
-
-        <div id="cardsExportArea" class="cards-export-area">
-          <!-- ================= FRONT ================= -->
-
-          <div class="card-column">
-            <span class="side-label"> FRONT </span>
-
-            <div id="idCardFront" class="id-card front-card">
-              <div class="card-top">
-                <div class="logo-box">
-                  <img src="./images/kwkma-logo.png" alt="KWKMA" />
-                </div>
-
-                <div class="academy-title">
-                  <strong> KUSHTIA WUSHU KUNG-FU </strong>
-
-                  <span> MARTIAL ART ACADEMY </span>
-
-                  <small> Since 2025 </small>
-                </div>
-
-                <div class="logo-box bwuf-logo">
-                  <img src="./images/bwuf-logo.png" alt="BWUF" />
-                </div>
-              </div>
-
-              <div class="card-title">STUDENT ID CARD</div>
-
-              <!-- Photo -->
-
-              <div class="student-photo">
-                <img id="cardPhoto" src="" alt="Student Photo" />
-
-                <div id="cardPhotoPlaceholder" class="photo-placeholder">
-                  <i class="fa-solid fa-user"></i>
-                </div>
-              </div>
-
-              <!-- Name -->
-
-              <div class="card-student-name">
-                <span id="cardStudentName"> STUDENT NAME </span>
-              </div>
-
-              <!-- Information -->
-
-              <div class="card-info">
-                <div class="info-row">
-                  <span> REGISTRATION NO. </span>
-
-                  <strong id="cardRegistration"> - </strong>
-                </div>
-
-                <div class="info-row">
-                  <span> DATE OF BIRTH </span>
-
-                  <strong id="cardDob"> - </strong>
-                </div>
-
-                <div class="info-row">
-                  <span> BLOOD GROUP </span>
-
-                  <strong id="cardBlood"> - </strong>
-                </div>
-
-                <div class="info-row">
-                  <span> MOBILE </span>
-
-                  <strong id="cardMobile"> - </strong>
-                </div>
-
-                <div class="info-row">
-                  <span> BELT </span>
-
-                  <strong id="cardBelt"> - </strong>
-                </div>
-
-                <div class="info-row validity-row">
-                  <span> VALIDITY </span>
-
-                  <strong id="cardValidity"> - </strong>
-                </div>
-              </div>
-
-              <!-- Footer -->
-
-              <div class="card-footer">
-                <span> OFFICIAL KWKMA STUDENT </span>
-
-                <span> KWKMA </span>
-              </div>
+      <!-- RIGHT: card preview -->
+      <section id="previewSection" class="panel preview-panel hidden">
+        <div class="cards-row">
+          <div class="card-preview-wrap">
+            <div class="card-scaler">
+              <div id="idCardFront"></div>
             </div>
           </div>
-
-          <!-- ================= BACK ================= -->
-
-          <div class="card-column">
-            <span class="side-label"> BACK </span>
-
-            <div id="idCardBack" class="id-card back-card">
-              <div class="back-logo">
-                <img src="./images/kwkma-logo.png" alt="KWKMA" />
-              </div>
-
-              <div class="back-academy-name">
-                <strong> KUSHTIA WUSHU KUNG-FU </strong>
-
-                <span> MARTIAL ART ACADEMY </span>
-              </div>
-
-              <div class="back-divider"></div>
-
-              <div class="back-heading">IMPORTANT INFORMATION</div>
-
-              <div class="rules">
-                <div class="rule">
-                  <span>01</span>
-
-                  <p>
-                    This ID card is the official identification of a registered
-                    KWKMA student.
-                  </p>
-                </div>
-
-                <div class="rule">
-                  <span>02</span>
-
-                  <p>
-                    This card is non-transferable and must be presented when
-                    requested by academy authority.
-                  </p>
-                </div>
-
-                <div class="rule">
-                  <span>03</span>
-
-                  <p>
-                    If found, please return this card to the academy office.
-                  </p>
-                </div>
-              </div>
-
-              <div class="contact-box">
-                <div>
-                  <i class="fa-solid fa-location-dot"></i>
-
-                  <span> Kushtia, Bangladesh </span>
-                </div>
-
-                <div>
-                  <i class="fa-solid fa-phone"></i>
-
-                  <span> +880 1XXXXXXXXX </span>
-                </div>
-
-                <div>
-                  <i class="fa-solid fa-envelope"></i>
-
-                  <span> kwkma@example.com </span>
-                </div>
-              </div>
-
-              <div class="back-footer">
-                <strong> KWKMA </strong>
-
-                <span> Kushtia Wushu Kung-Fu Martial Art Academy </span>
-              </div>
+          <div class="card-preview-wrap">
+            <div class="card-scaler">
+              <div id="idCardBack"></div>
             </div>
           </div>
         </div>
+
+        <div class="btn-row download-row">
+          <button id="downloadPngBtn" class="btn btn-download" type="button">
+            <i class="fa-solid fa-image"></i>
+            Download PNG
+          </button>
+          <button id="downloadPdfBtn" class="btn btn-download" type="button">
+            <i class="fa-solid fa-file-pdf"></i>
+            Download PDF
+          </button>
+        </div>
+        <p class="hint small">
+          প্রতিটা card 2.3654" × 3.6252" (710 × 1088 px) — সাইজ/রেশিও সবসময়
+          ফিক্সড।
+        </p>
       </section>
     </main>
 
-    <!-- =====================================================
-       LIBRARIES
-  ====================================================== -->
-
+    <!-- Libraries required by js/id-card.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <!-- JS -->
-
+    <!-- Your existing advanced ID card logic -->
     <script type="module" src="./js/id-card.js"></script>
   </body>
 </html>

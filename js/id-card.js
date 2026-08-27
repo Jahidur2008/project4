@@ -399,7 +399,7 @@ function createText(
 
     element.style.fontSize =
         options.fontSize ||
-        "24px";
+        "28px";
 
     element.style.fontWeight =
         options.fontWeight ||
@@ -421,6 +421,9 @@ function createText(
         options.whiteSpace ||
         "nowrap";
 
+    element.style.zIndex =
+    options.zIndex || "auto";
+
     element.style.overflow =
         "hidden";
 
@@ -429,70 +432,49 @@ function createText(
 
 
 // =====================================================
-// CREATE PHOTO
+// STEP 2 — REPLACE createStudentPhoto WITH THIS
+// (uses background-image instead of <img object-fit>,
+// which html2canvas renders correctly without squishing)
 // =====================================================
-
+ 
 function createStudentPhoto(
     parent,
     photoURL
 ) {
-
-    const photo =
-        createOverlay(parent);
-
-    // Photo position based on the supplied
-    // 710 × 1088 front template.
-
-    photo.style.left =
-        "201px";
-
-    photo.style.top =
-        "313px";
-
-    photo.style.width =
-        "307px";
-
-    photo.style.height =
-        "345px";
-
-    photo.style.objectFit =
-        "cover";
-
-    photo.style.objectPosition =
-        "center";
-
-    photo.style.borderRadius =
-        "38px";
-
-    photo.style.display =
-        "block";
-
-    photo.style.zIndex =
-        "10";
-
-    photo.style.background =
-        "#eeeeee";
-
+ 
+    const photoBox =
+        document.createElement("div");
+ 
+    photoBox.style.position = "absolute";
+    photoBox.style.boxSizing = "border-box";
+ 
+    photoBox.style.left = "201px";
+    photoBox.style.top = "320px";
+    photoBox.style.width = "307px";
+    photoBox.style.height = "345px";
+    photoBox.style.borderRadius = "25px";
+    photoBox.style.zIndex = "10";
+    photoBox.style.background = "#eeeeee";
+ 
     if (photoURL) {
-
-        photo.src =
-            photoURL;
-
-        photo.onerror = () => {
-
-            photo.style.display =
-                "none";
-        };
-
-    } else {
-
-        photo.style.display =
-            "none";
+ 
+        photoBox.style.backgroundImage =
+            `url("${photoURL}")`;
+ 
+        photoBox.style.backgroundSize =
+            "cover";
+ 
+        photoBox.style.backgroundPosition =
+            "center";
+ 
+        photoBox.style.backgroundRepeat =
+            "no-repeat";
     }
-
-    return photo;
+ 
+    parent.appendChild(photoBox);
+ 
+    return photoBox;
 }
-
 
 // =====================================================
 // FRONT CARD
@@ -643,7 +625,7 @@ function buildFrontCard(student, validity) {
         registration,
         {
             ...valueOptions,
-            top: "751px"
+            top: "745px"
         }
     );
 
@@ -655,7 +637,7 @@ function buildFrontCard(student, validity) {
         dob,
         {
             ...valueOptions,
-            top: "803px"
+            top: "780px"
         }
     );
 
@@ -667,7 +649,7 @@ function buildFrontCard(student, validity) {
         blood,
         {
             ...valueOptions,
-            top: "854px",
+            top: "819px",
             color: "#ff2525"
         }
     );
@@ -680,7 +662,7 @@ function buildFrontCard(student, validity) {
         mobile,
         {
             ...valueOptions,
-            top: "905px"
+            top: "857px"
         }
     );
 
@@ -692,7 +674,7 @@ function buildFrontCard(student, validity) {
         valid,
         {
             ...valueOptions,
-            top: "957px"
+            top: "897px"
         }
     );
 }
@@ -1158,153 +1140,204 @@ function createExportArea() {
 
 
 // =====================================================
-// DOWNLOAD PNG
+// WAIT FOR IMAGES TO FULLY LOAD
+// (fixes: photo sometimes missing/blank in downloaded PNG
+// because html2canvas captured the clone before the photo
+// had finished loading)
 // =====================================================
 
-async function downloadPNG() {
+function waitForImagesToLoad(container, timeoutMs = 8000) {
 
+    const images =
+        Array.from(container.querySelectorAll("img"));
+
+    if (images.length === 0) {
+        return Promise.resolve();
+    }
+
+    const promises = images.map(img => {
+
+        // already loaded (e.g. from browser cache)
+        if (img.complete && img.naturalWidth > 0) {
+            return Promise.resolve();
+        }
+
+        return new Promise(resolve => {
+
+            const done = () => resolve();
+
+            img.addEventListener("load", done, { once: true });
+            img.addEventListener("error", done, { once: true });
+
+            // safety timeout so a broken/slow image never blocks forever
+            setTimeout(done, timeoutMs);
+        });
+    });
+
+    return Promise.all(promises);
+}
+
+
+// =====================================================
+// OFFSCREEN CLONE
+// =====================================================
+
+function createOffscreenClone(cardElement) {
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.style.position = "fixed";
+    wrapper.style.left = "-100000px";
+    wrapper.style.top = "0";
+    wrapper.style.zIndex = "-9999";
+    wrapper.style.background = "#ffffff";
+
+    const clone =
+        cardElement.cloneNode(true);
+
+    clone.style.width = `${CARD_WIDTH}px`;
+    clone.style.height = `${CARD_HEIGHT}px`;
+    clone.style.minWidth = `${CARD_WIDTH}px`;
+    clone.style.minHeight = `${CARD_HEIGHT}px`;
+    clone.style.transform = "none";
+    clone.style.margin = "0";
+    clone.style.boxShadow = "none";
+
+    wrapper.appendChild(clone);
+    document.body.appendChild(wrapper);
+
+    return { wrapper, clone };
+}
+
+
+// =====================================================
+// DOWNLOAD CANVAS HELPER
+// =====================================================
+
+function downloadCanvasAsFile(canvas, filename) {
+
+    const link =
+        document.createElement("a");
+
+    link.download = filename;
+
+    link.href =
+        canvas.toDataURL("image/png", 1.0);
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+
+ 
+// =====================================================
+// STEP 3 — REPLACE downloadPNG WITH THIS
+// (bundles Front + Back into a single ZIP so the browser
+// never blocks a "second" download)
+// =====================================================
+ 
+async function downloadPNG() {
+ 
     if (
         !currentStudent ||
         !idCardFront ||
         !idCardBack
     ) {
-
-        showMessage(
-            "Please generate an ID Card first."
-        );
-
+        showMessage("Please generate an ID Card first.");
         return;
     }
-
-
+ 
     try {
-
+ 
         if (downloadPngBtn) {
-
-            downloadPngBtn.disabled =
-                true;
-
+            downloadPngBtn.disabled = true;
             downloadPngBtn.innerHTML = `
                 <i class="fa-solid fa-spinner fa-spin"></i>
                 Creating PNG...
             `;
         }
-
-
-        // =================================================
-        // CREATE EXPORT
-        // =================================================
-
-        const exportWrapper =
-            createExportArea();
-
-
-        // Allow browser to render
-        await new Promise(
-            resolve =>
-                setTimeout(
-                    resolve,
-                    150
-                )
-        );
-
-
-        // =================================================
-        // CANVAS
-        // =================================================
-
-        const canvas =
-            await html2canvas(
-                exportWrapper,
-                {
-                    scale: 3,
-
-                    useCORS: true,
-
-                    allowTaint: false,
-
-                    backgroundColor:
-                        "#ffffff",
-
-                    imageTimeout:
-                        15000,
-
-                    logging:
-                        false
-                }
-            );
-
-
-        document.body.removeChild(
-            exportWrapper
-        );
-
-
-        // =================================================
-        // DOWNLOAD
-        // =================================================
-
-        const link =
-            document.createElement("a");
-
-
+ 
+        if (!window.JSZip) {
+            throw new Error("JSZip library not loaded.");
+        }
+ 
         const registration =
-            normalizeRegistration(
-                currentStudent.registrationNo
-            )
-                .replace(
-                    /[^a-zA-Z0-9-]/g,
-                    ""
-                );
-
-
-        link.download =
-            `${registration}-ID-Card.png`;
-
-
-        link.href =
-            canvas.toDataURL(
-                "image/png",
-                1.0
+            normalizeRegistration(currentStudent.registrationNo)
+                .replace(/[^a-zA-Z0-9-]/g, "");
+ 
+        const html2canvasOptions = {
+            scale: 3,
+            useCORS: true,
+            allowTaint: false,
+            backgroundColor: "#ffffff",
+            imageTimeout: 15000,
+            logging: false
+        };
+ 
+        // ---------- FRONT ----------
+        const frontClone = createOffscreenClone(idCardFront);
+        await waitForImagesToLoad(frontClone.clone);
+        await new Promise(resolve => setTimeout(resolve, 100));
+ 
+        const frontCanvas =
+            await html2canvas(frontClone.clone, html2canvasOptions);
+ 
+        document.body.removeChild(frontClone.wrapper);
+ 
+        // ---------- BACK ----------
+        const backClone = createOffscreenClone(idCardBack);
+        await waitForImagesToLoad(backClone.clone);
+        await new Promise(resolve => setTimeout(resolve, 100));
+ 
+        const backCanvas =
+            await html2canvas(backClone.clone, html2canvasOptions);
+ 
+        document.body.removeChild(backClone.wrapper);
+ 
+        // ---------- ZIP ----------
+        const frontBlob =
+            await new Promise(resolve =>
+                frontCanvas.toBlob(resolve, "image/png", 1.0)
             );
-
-
-        document.body.appendChild(
-            link
-        );
-
+ 
+        const backBlob =
+            await new Promise(resolve =>
+                backCanvas.toBlob(resolve, "image/png", 1.0)
+            );
+ 
+        const zip = new JSZip();
+        zip.file(`${registration}-Front.png`, frontBlob);
+        zip.file(`${registration}-Back.png`, backBlob);
+ 
+        const zipBlob =
+            await zip.generateAsync({ type: "blob" });
+ 
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(zipBlob);
+        link.download = `${registration}-ID-Card-PNG.zip`;
+ 
+        document.body.appendChild(link);
         link.click();
-
-        document.body.removeChild(
-            link
-        );
-
-
+        document.body.removeChild(link);
+ 
+        URL.revokeObjectURL(link.href);
+ 
         showMessage(
-            "PNG downloaded successfully.",
+            "PNG (Front + Back) downloaded as ZIP.",
             "success"
         );
-
-
+ 
     } catch (error) {
-
-        console.error(
-            "PNG Download Error:",
-            error
-        );
-
-        showMessage(
-            "PNG download failed."
-        );
-
-
+ 
+        console.error("PNG Download Error:", error);
+        showMessage("PNG download failed.");
+ 
     } finally {
-
+ 
         if (downloadPngBtn) {
-
-            downloadPngBtn.disabled =
-                false;
-
+            downloadPngBtn.disabled = false;
             downloadPngBtn.innerHTML = `
                 <i class="fa-solid fa-image"></i>
                 Download PNG
@@ -1315,7 +1348,8 @@ async function downloadPNG() {
 
 
 // =====================================================
-// DOWNLOAD PDF
+// DOWNLOAD PDF  (FRONT + BACK side-by-side on one A4 page,
+// captured from full-size offscreen clones)
 // =====================================================
 
 async function downloadPDF() {
@@ -1325,369 +1359,109 @@ async function downloadPDF() {
         !idCardFront ||
         !idCardBack
     ) {
-
-        showMessage(
-            "Please generate an ID Card first."
-        );
-
+        showMessage("Please generate an ID Card first.");
         return;
     }
-
 
     try {
 
         if (downloadPdfBtn) {
-
-            downloadPdfBtn.disabled =
-                true;
-
+            downloadPdfBtn.disabled = true;
             downloadPdfBtn.innerHTML = `
                 <i class="fa-solid fa-spinner fa-spin"></i>
                 Creating PDF...
             `;
         }
 
-
-        // =================================================
-        // CHECK jsPDF
-        // =================================================
-
-        if (
-            !window.jspdf ||
-            !window.jspdf.jsPDF
-        ) {
-
-            throw new Error(
-                "jsPDF library not loaded."
-            );
+        if (!window.jspdf || !window.jspdf.jsPDF) {
+            throw new Error("jsPDF library not loaded.");
         }
 
+        const { jsPDF } = window.jspdf;
 
-        const {
-            jsPDF
-        } = window.jspdf;
+        const html2canvasOptions = {
+            scale: 3,
+            useCORS: true,
+            allowTaint: false,
+            backgroundColor: "#ffffff",
+            imageTimeout: 15000,
+            logging: false
+        };
 
+        // ---------- FRONT ----------
+        const frontClone = createOffscreenClone(idCardFront);
 
-        // =================================================
-        // CREATE EXPORT AREA
-        // =================================================
-
-        const exportWrapper =
-            createExportArea();
-
-
-        await new Promise(
-            resolve =>
-                setTimeout(
-                    resolve,
-                    150
-                )
-        );
-
-
-        // =================================================
-        // CREATE CANVAS
-        // =================================================
-
-        const canvas =
-            await html2canvas(
-                exportWrapper,
-                {
-                    scale: 3,
-
-                    useCORS: true,
-
-                    allowTaint: false,
-
-                    backgroundColor:
-                        "#ffffff",
-
-                    imageTimeout:
-                        15000,
-
-                    logging:
-                        false
-                }
-            );
-
-
-        document.body.removeChild(
-            exportWrapper
-        );
-
-
-        // =================================================
-        // IMAGE
-        // =================================================
-
-        const imageData =
-            canvas.toDataURL(
-                "image/png",
-                1.0
-            );
-
-
-        // =================================================
-        // CARD PHYSICAL SIZE
-        // =================================================
-        //
-        // 2.3654 × 3.6252 inch
-        //
-        // Landscape A4 page
-        // with both cards centered.
-        // =================================================
-
-        const cardWidthMM =
-            2.3654 * 25.4;
-
-        const cardHeightMM =
-            3.6252 * 25.4;
-
-
-        const pdf =
-            new jsPDF({
-                orientation:
-                    "landscape",
-
-                unit:
-                    "mm",
-
-                format:
-                    "a4",
-
-                compress:
-                    true
-            });
-
-
-        const pageWidth =
-            pdf.internal.pageSize
-                .getWidth();
-
-        const pageHeight =
-            pdf.internal.pageSize
-                .getHeight();
-
-
-        // =================================================
-        // GAP
-        // =================================================
-
-        const gap =
-            8;
-
-
-        // Total width
-
-        const totalWidth =
-            cardWidthMM * 2 +
-            gap;
-
-
-        // Starting X
-
-        const startX =
-            (
-                pageWidth -
-                totalWidth
-            ) / 2;
-
-
-        const startY =
-            (
-                pageHeight -
-                cardHeightMM
-            ) / 2;
-
-
-        // =================================================
-        // FRONT IMAGE
-        // =================================================
-        //
-        // Canvas contains both cards.
-        // Calculate each half.
-        // =================================================
-
-        const halfCanvasWidth =
-            canvas.width / 2;
-
-
-        const cardCanvasHeight =
-            canvas.height;
-
+        await new Promise(resolve => setTimeout(resolve, 150));
 
         const frontCanvas =
-            document.createElement(
-                "canvas"
-            );
+            await html2canvas(frontClone.clone, html2canvasOptions);
 
-        frontCanvas.width =
-            halfCanvasWidth;
+        document.body.removeChild(frontClone.wrapper);
 
-        frontCanvas.height =
-            cardCanvasHeight;
+        // ---------- BACK ----------
+        const backClone = createOffscreenClone(idCardBack);
 
-
-        const frontContext =
-            frontCanvas.getContext(
-                "2d"
-            );
-
-
-        frontContext.drawImage(
-            canvas,
-
-            0,
-            0,
-            halfCanvasWidth,
-            cardCanvasHeight,
-
-            0,
-            0,
-            halfCanvasWidth,
-            cardCanvasHeight
-        );
-
-
-        // =================================================
-        // BACK IMAGE
-        // =================================================
+        await new Promise(resolve => setTimeout(resolve, 150));
 
         const backCanvas =
-            document.createElement(
-                "canvas"
-            );
+            await html2canvas(backClone.clone, html2canvasOptions);
 
-        backCanvas.width =
-            halfCanvasWidth;
+        document.body.removeChild(backClone.wrapper);
 
-        backCanvas.height =
-            cardCanvasHeight;
+        const frontData = frontCanvas.toDataURL("image/png", 1.0);
+        const backData = backCanvas.toDataURL("image/png", 1.0);
 
+        // ---------- CARD PHYSICAL SIZE (mm) ----------
+        const cardWidthMM = 2.3654 * 25.4;
+        const cardHeightMM = 3.6252 * 25.4;
 
-        const backContext =
-            backCanvas.getContext(
-                "2d"
-            );
+        const pdf = new jsPDF({
+            orientation: "landscape",
+            unit: "mm",
+            format: "a4",
+            compress: true
+        });
 
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
 
-        backContext.drawImage(
-            canvas,
+        const gap = 8; // mm gap between front & back
 
-            canvas.width -
-                halfCanvasWidth,
-            0,
-
-            halfCanvasWidth,
-            cardCanvasHeight,
-
-            0,
-            0,
-
-            halfCanvasWidth,
-            cardCanvasHeight
-        );
-
-
-        const frontData =
-            frontCanvas.toDataURL(
-                "image/png",
-                1.0
-            );
-
-
-        const backData =
-            backCanvas.toDataURL(
-                "image/png",
-                1.0
-            );
-
-
-        // =================================================
-        // ADD FRONT
-        // =================================================
+        const totalWidth = cardWidthMM * 2 + gap;
+        const startX = (pageWidth - totalWidth) / 2;
+        const startY = (pageHeight - cardHeightMM) / 2;
 
         pdf.addImage(
-            frontData,
-            "PNG",
-
-            startX,
-            startY,
-
-            cardWidthMM,
-            cardHeightMM,
-
-            undefined,
-            "FAST"
+            frontData, "PNG",
+            startX, startY,
+            cardWidthMM, cardHeightMM,
+            undefined, "FAST"
         );
-
-
-        // =================================================
-        // ADD BACK
-        // =================================================
 
         pdf.addImage(
-            backData,
-            "PNG",
-
-            startX +
-                cardWidthMM +
-                gap,
-
-            startY,
-
-            cardWidthMM,
-            cardHeightMM,
-
-            undefined,
-            "FAST"
+            backData, "PNG",
+            startX + cardWidthMM + gap, startY,
+            cardWidthMM, cardHeightMM,
+            undefined, "FAST"
         );
-
-
-        // =================================================
-        // FILE NAME
-        // =================================================
 
         const registration =
-            normalizeRegistration(
-                currentStudent.registrationNo
-            )
-                .replace(
-                    /[^a-zA-Z0-9-]/g,
-                    ""
-                );
+            normalizeRegistration(currentStudent.registrationNo)
+                .replace(/[^a-zA-Z0-9-]/g, "");
 
+        pdf.save(`${registration}-ID-Card.pdf`);
 
-        pdf.save(
-            `${registration}-ID-Card.pdf`
-        );
-
-
-        showMessage(
-            "PDF downloaded successfully.",
-            "success"
-        );
-
+        showMessage("PDF downloaded successfully.", "success");
 
     } catch (error) {
 
-        console.error(
-            "PDF Download Error:",
-            error
-        );
-
-        showMessage(
-            "PDF download failed."
-        );
-
+        console.error("PDF Download Error:", error);
+        showMessage("PDF download failed.");
 
     } finally {
 
         if (downloadPdfBtn) {
-
-            downloadPdfBtn.disabled =
-                false;
-
+            downloadPdfBtn.disabled = false;
             downloadPdfBtn.innerHTML = `
                 <i class="fa-solid fa-file-pdf"></i>
                 Download PDF
@@ -1695,7 +1469,6 @@ async function downloadPDF() {
         }
     }
 }
-
 
 // =====================================================
 // PNG BUTTON
@@ -1750,3 +1523,74 @@ if (idCardBack) {
 // =====================================================
 
 autoLoadStudent();
+
+// =====================================================
+// RESET BUTTON
+// =====================================================
+
+const resetBtn =
+    document.getElementById("resetBtn");
+
+if (resetBtn) {
+
+    resetBtn.addEventListener(
+        "click",
+        () => {
+
+            if (registrationInput) {
+                registrationInput.value = "";
+            }
+
+            if (validityInput) {
+                validityInput.value = "";
+            }
+
+            currentStudent = null;
+            currentValidity = "";
+
+            hideMessage();
+
+            if (previewSection) {
+                previewSection.classList.add("hidden");
+            }
+
+            if (idCardFront) {
+                prepareCard(idCardFront, FRONT_TEMPLATE);
+            }
+
+            if (idCardBack) {
+                prepareCard(idCardBack, BACK_TEMPLATE);
+            }
+
+            registrationInput?.focus();
+        }
+    );
+}
+
+// =====================================================
+// BACK BUTTON
+// =====================================================
+
+const backBtn =
+    document.getElementById("backBtn");
+
+if (backBtn) {
+
+    backBtn.addEventListener(
+        "click",
+        () => {
+
+            if (
+                document.referrer &&
+                document.referrer.includes(window.location.origin)
+            ) {
+
+                window.history.back();
+
+            } else {
+
+                window.location.href = "dashboard.html";
+            }
+        }
+    );
+}
