@@ -255,7 +255,7 @@ const studentName = toTitleCase(student.name || "STUDENT NAME");
 
     createText(certificate, registration, {
         left: "1270px",
-        top: "338px",
+        top: "336px",
         width: "160px",
         height: "32px",
         fontFamily:"FELIXTI",

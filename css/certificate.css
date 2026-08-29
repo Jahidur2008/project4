@@ -4,18 +4,24 @@
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "OPTIOldFashionedScript";
   src: url("../fonts/OPTIOldFashioned-Script.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "cataneo-bt";
   src: url("../fonts/cataneo-bt.TTF") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
+
+/* =====================================================
+   ROOT
+===================================================== */
 
 :root {
   --bg: #f4f5f9;
@@ -29,293 +35,1118 @@
   --success: #16a34a;
 }
 
+/* =====================================================
+   GLOBAL
+===================================================== */
+
 * {
   box-sizing: border-box;
 }
 
+html {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
+  width: 100%;
+  min-height: 100vh;
+
   background: var(--bg);
   color: var(--text);
+
   font-family: "Inter", system-ui, sans-serif;
-  min-height: 100vh;
+
+  overflow-x: hidden;
 }
 
 .hidden {
   display: none !important;
 }
 
-/* ---------- top bar ---------- */
+/* =====================================================
+   TOP BAR
+===================================================== */
+
 .topbar {
+  width: 100%;
+  min-height: 78px;
+
   padding: 20px 32px;
+
   border-bottom: 1px solid var(--panel-border);
+
   background: var(--panel);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  gap: 20px;
+
   position: sticky;
   top: 0;
+
   z-index: 100;
 }
+
 .topbar-left {
+  min-width: 0;
+
   display: flex;
   align-items: center;
+
   gap: 16px;
 }
+
 .back-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   width: 38px;
   height: 38px;
+  min-width: 38px;
+
   border-radius: 10px;
+
   border: 1px solid var(--panel-border);
+
   background: #f8f9fc;
+
   color: var(--text);
+
   font-size: 14px;
+
   cursor: pointer;
+
   flex-shrink: 0;
 }
+
 .back-btn:hover {
   background: var(--orange-soft);
+
   border-color: var(--orange);
+
   color: var(--orange);
+}
+
+.topbar-titles {
+  min-width: 0;
 }
 
 .topbar-titles p.eyebrow {
   margin: 0 0 4px;
+
   font-size: 11.5px;
+
   font-weight: 700;
+
   letter-spacing: 0.8px;
+
   color: #e11d48;
+
   text-transform: uppercase;
 }
+
 .topbar-titles h1 {
   margin: 0;
+
   font-size: 22px;
+
   font-weight: 800;
+
+  line-height: 1.25;
+
   color: var(--text);
+
+  word-break: break-word;
 }
 
 .topbar-right {
   display: flex;
   align-items: center;
+
+  flex-shrink: 0;
 }
+
 .status-pill {
   display: inline-flex;
+
   align-items: center;
+
   gap: 8px;
+
   padding: 7px 14px;
+
   border-radius: 999px;
+
   background: #e9f9ef;
+
   color: #16a34a;
+
   font-size: 12.5px;
+
   font-weight: 600;
+
+  white-space: nowrap;
 }
+
 .status-dot {
   width: 7px;
   height: 7px;
+
   border-radius: 50%;
+
   background: #16a34a;
+
   box-shadow: 0 0 0 3px #16a34a22;
+
+  flex-shrink: 0;
 }
 
-/* ---------- layout ---------- */
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
+
 .layout {
+  width: 100%;
   max-width: 1200px;
+
   margin: 0 auto;
+
   padding: 40px 24px 80px;
+
   display: grid;
-  grid-template-columns: 360px 1fr;
+
+  grid-template-columns:
+    minmax(300px, 360px)
+    minmax(0, 1fr);
+
   gap: 28px;
+
   align-items: start;
 }
-@media (max-width: 900px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-}
+
+/* =====================================================
+   PANEL
+===================================================== */
 
 .panel {
+  width: 100%;
+  min-width: 0;
+
   background: var(--panel);
+
   border: 1px solid var(--panel-border);
+
   border-radius: 16px;
+
   padding: 26px;
+
   box-shadow: 0 1px 3px rgba(20, 20, 40, 0.04);
 }
 
 .form-panel h2 {
   margin: 0 0 8px;
+
   font-size: 18px;
+
+  line-height: 1.4;
 }
+
 .hint {
   color: var(--text-dim);
+
   font-size: 13px;
+
   line-height: 1.6;
+
   margin: 0 0 20px;
 }
+
 .hint.small {
   font-size: 11.5px;
+
   margin: 14px 0 0;
 }
 
 .field-label {
   display: block;
+
   font-size: 12.5px;
+
   color: var(--text-dim);
+
   margin-bottom: 8px;
 }
 
+/* =====================================================
+   REGISTRATION INPUT
+===================================================== */
+
 .reg-input-group {
+  width: 100%;
+
   display: flex;
   align-items: stretch;
+
   border: 1px solid var(--panel-border);
+
   border-radius: 10px;
+
   overflow: hidden;
+
   background: #f8f9fc;
 }
+
 .reg-prefix {
   display: flex;
+
   align-items: center;
+
   padding: 0 12px;
+
   background: #eef0f6;
+
   color: var(--orange);
+
   font-weight: 700;
+
   font-size: 14px;
+
   border-right: 1px solid var(--panel-border);
+
   white-space: nowrap;
+
+  flex-shrink: 0;
 }
+
 #registrationInput {
   flex: 1;
+
   min-width: 0;
+
+  width: 100%;
+
   border: 0;
+
   outline: none;
+
   background: transparent;
+
   color: var(--text);
+
   font-size: 15px;
+
   padding: 12px;
 }
 
 .select-input {
   width: 100%;
+
+  min-height: 44px;
+
   border: 1px solid var(--panel-border);
+
   border-radius: 10px;
+
   background: #f8f9fc;
+
   color: var(--text);
+
   font-size: 15px;
+
   padding: 12px;
+
   outline: none;
+
   margin-top: 8px;
+
   cursor: pointer;
 }
+
 .select-input:focus,
 #registrationInput:focus {
   outline: 2px solid var(--orange-soft);
 }
 
+/* =====================================================
+   BUTTONS
+===================================================== */
+
 .btn-row {
+  width: 100%;
+
   display: flex;
+
   gap: 10px;
+
   margin-top: 18px;
+
   flex-wrap: wrap;
 }
+
 .btn {
-  flex: 1;
-  min-width: 160px;
+  flex: 1 1 160px;
+
+  min-width: 0;
+
+  min-height: 44px;
+
   padding: 12px 14px;
+
   border-radius: 10px;
+
   border: 1px solid transparent;
+
   font-size: 14px;
+
   font-weight: 600;
+
   cursor: pointer;
+
   display: inline-flex;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 8px;
+
   transition:
     transform 0.06s ease,
     opacity 0.2s ease;
+
+  white-space: normal;
+
+  text-align: center;
 }
+
 .btn:active {
   transform: scale(0.98);
 }
+
 .btn:disabled {
   opacity: 0.5;
+
   cursor: not-allowed;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, #ffb347, var(--orange));
+
   color: #1a1005;
 }
+
 .btn-ghost {
   background: #f4f5f9;
+
   border-color: var(--panel-border);
+
   color: var(--text);
 }
+
 .btn-download {
   border: 1px solid var(--orange);
+
   background: #fff8ef;
+
   color: var(--orange);
+
   font-weight: 700;
 }
+
 .btn-download:disabled {
   opacity: 0.4;
+
   cursor: not-allowed;
 }
 
+/* =====================================================
+   MESSAGE BOX
+===================================================== */
+
 .message-box {
+  width: 100%;
+
   margin: 16px 0 0;
+
   padding: 10px 12px;
+
   border-radius: 8px;
+
   font-size: 13px;
+
+  line-height: 1.5;
+
   background: #f4f5f9;
+
   border: 1px solid var(--panel-border);
+
   color: var(--text);
+
+  overflow-wrap: anywhere;
 }
+
 .message-box.error {
   color: var(--danger);
+
   border-color: var(--danger);
+
   background: #fef2f2;
 }
+
 .message-box.success {
   color: var(--success);
+
   border-color: var(--success);
+
   background: #f0fdf4;
 }
 
-/* ---------- preview panel ---------- */
+/* =====================================================
+   PREVIEW PANEL
+===================================================== */
+
 .preview-panel {
+  width: 100%;
+
+  min-width: 0;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
+
+  overflow: hidden;
 }
 
-/* Certificate is landscape 1536x1024 (3:2). Scaled down for on-screen
-   preview; the download logic captures a full-size offscreen clone,
-   so this scaling never affects output quality. */
+/* =====================================================
+   CERTIFICATE PREVIEW
+   ORIGINAL CERTIFICATE = 1536 x 1024
+   RATIO = 3 : 2
+===================================================== */
+
 .cert-preview-wrap {
   width: 560px;
+
   height: 373px;
+
+  max-width: 100%;
+
   overflow: hidden;
+
   border-radius: 10px;
+
   border: 1px solid var(--panel-border);
+
   background: #000;
+
+  position: relative;
+
+  flex-shrink: 0;
 }
+
 .cert-scaler {
-  transform: scale(0.3645);
+  width: 1536px;
+
+  height: 1024px;
+
+  transform: scale(0.3645833333);
+
   transform-origin: top left;
+
+  position: relative;
 }
-@media (max-width: 620px) {
-  .cert-preview-wrap {
-    width: 320px;
-    height: 213px;
+
+/* =====================================================
+   DOWNLOAD ROW
+===================================================== */
+
+.download-row {
+  width: 100%;
+
+  max-width: 560px;
+
+  margin-top: 22px;
+}
+
+/* =====================================================
+   LARGE LAPTOP
+   1100px - 1200px
+===================================================== */
+
+@media (max-width: 1100px) {
+  .topbar {
+    padding: 18px 24px;
   }
-  .cert-scaler {
-    transform: scale(0.2083);
+
+  .layout {
+    max-width: 100%;
+
+    padding: 32px 20px 60px;
+
+    grid-template-columns:
+      minmax(280px, 320px)
+      minmax(0, 1fr);
+
+    gap: 22px;
+  }
+
+  .panel {
+    padding: 22px;
+  }
+
+  .cert-preview-wrap {
+    width: 100%;
+
+    max-width: 560px;
+
+    height: auto;
+
+    aspect-ratio: 3 / 2;
   }
 }
 
-.download-row {
-  margin-top: 22px;
+/* =====================================================
+   IMPORTANT:
+   990px এর নিচে FULL SCREEN CERTIFICATE
+===================================================== */
+
+@media (max-width: 990px) {
+  .layout {
+    width: 100%;
+
+    max-width: 100%;
+
+    grid-template-columns: 1fr;
+
+    padding: 28px 20px 60px;
+
+    gap: 24px;
+  }
+
+  .form-panel {
+    width: 100%;
+  }
+
+  .preview-panel {
+    width: 100%;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    overflow: visible;
+  }
+
+  /*
+    Certificate wrapper এখন screen-এর available
+    width-এর সাথে automatically fit করবে.
+  */
+
+  .cert-preview-wrap {
+    width: 100%;
+
+    max-width: 700px;
+
+    height: auto;
+
+    aspect-ratio: 3 / 2;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+  }
+
+  /*
+    700px preview হলে:
+    1536 × 0.455729 = 700px
+    1024 × 0.455729 ≈ 466.7px
+
+    অর্থাৎ certificate পুরোটা fit করবে।
+  */
+
+  .cert-scaler {
+    width: 1536px;
+
+    height: 1024px;
+
+    transform: scale(0.4557291667);
+
+    transform-origin: top left;
+  }
+
+  .download-row {
+    width: 100%;
+
+    max-width: 700px;
+
+    margin-top: 22px;
+  }
+}
+
+/* =====================================================
+   900px - 768px
+===================================================== */
+
+@media (max-width: 900px) {
+  .topbar {
+    min-height: auto;
+
+    padding: 16px 20px;
+  }
+
+  .topbar-titles h1 {
+    font-size: 20px;
+  }
+
+  .layout {
+    padding: 26px 20px 55px;
+  }
+
+  .panel {
+    padding: 22px;
+  }
+
+  .cert-preview-wrap {
+    width: 100%;
+
+    max-width: 680px;
+
+    aspect-ratio: 3 / 2;
+  }
+
+  .cert-scaler {
+    transform: scale(0.4427083333);
+  }
+
+  .download-row {
+    max-width: 680px;
+  }
+}
+
+/* =====================================================
+   767px - 601px
+===================================================== */
+
+@media (max-width: 767px) {
+  .topbar {
+    padding: 14px 16px;
+
+    gap: 12px;
+  }
+
+  .topbar-left {
+    gap: 12px;
+  }
+
+  .back-btn {
+    width: 36px;
+
+    height: 36px;
+
+    min-width: 36px;
+  }
+
+  .topbar-titles p.eyebrow {
+    font-size: 10px;
+
+    letter-spacing: 0.6px;
+  }
+
+  .topbar-titles h1 {
+    font-size: 18px;
+  }
+
+  .status-pill {
+    padding: 6px 10px;
+
+    font-size: 11px;
+  }
+
+  .layout {
+    padding: 22px 16px 50px;
+
+    gap: 20px;
+  }
+
+  .panel {
+    padding: 20px;
+
+    border-radius: 14px;
+  }
+
+  .form-panel h2 {
+    font-size: 17px;
+  }
+
+  .hint {
+    font-size: 12.5px;
+  }
+
+  .btn {
+    flex: 1 1 140px;
+  }
+
+  /*
+    600px preview:
+    600 / 1536 = 0.390625
+  */
+
+  .cert-preview-wrap {
+    width: 100%;
+
+    max-width: 600px;
+
+    aspect-ratio: 3 / 2;
+  }
+
+  .cert-scaler {
+    transform: scale(0.390625);
+  }
+
+  .download-row {
+    width: 100%;
+
+    max-width: 600px;
+
+    margin-top: 20px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+   600px এর নিচে
+===================================================== */
+
+@media (max-width: 600px) {
+  .topbar {
+    padding: 13px 14px;
+  }
+
+  .topbar-left {
+    flex: 1;
+
+    min-width: 0;
+  }
+
+  .topbar-titles {
+    min-width: 0;
+  }
+
+  .topbar-titles h1 {
+    font-size: 17px;
+
+    overflow-wrap: anywhere;
+  }
+
+  /*
+    Mobile-এ status compact
+  */
+
+  .status-pill {
+    width: 28px;
+
+    height: 28px;
+
+    padding: 0;
+
+    justify-content: center;
+
+    font-size: 0;
+  }
+
+  .status-dot {
+    width: 7px;
+
+    height: 7px;
+  }
+
+  .layout {
+    padding: 18px 12px 40px;
+
+    gap: 18px;
+  }
+
+  .panel {
+    padding: 17px;
+
+    border-radius: 12px;
+  }
+
+  .reg-prefix {
+    padding: 0 9px;
+
+    font-size: 13px;
+  }
+
+  #registrationInput {
+    font-size: 14px;
+
+    padding: 11px 10px;
+  }
+
+  .select-input {
+    font-size: 14px;
+
+    padding: 11px;
+  }
+
+  .btn-row {
+    flex-direction: column;
+
+    gap: 9px;
+  }
+
+  .btn {
+    width: 100%;
+
+    flex: 1 1 auto;
+  }
+
+  /*
+    480px পর্যন্ত certificate fit
+  */
+
+  .cert-preview-wrap {
+    width: 100%;
+
+    max-width: 100%;
+
+    aspect-ratio: 3 / 2;
+  }
+
+  /*
+    480 / 1536 = 0.3125
+  */
+
+  .cert-scaler {
+    transform: scale(0.3125);
+  }
+
+  .download-row {
+    width: 100%;
+
+    max-width: 100%;
+
+    margin-top: 18px;
+  }
+
+  .download-row .btn {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+   480px এর নিচে
+===================================================== */
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 12px;
+  }
+
+  .topbar-left {
+    gap: 9px;
+  }
+
+  .back-btn {
+    width: 34px;
+
+    height: 34px;
+
+    min-width: 34px;
+
+    border-radius: 8px;
+  }
+
+  .topbar-titles p.eyebrow {
+    display: none;
+  }
+
+  .topbar-titles h1 {
+    font-size: 16px;
+  }
+
+  .layout {
+    padding: 16px 10px 35px;
+  }
+
+  .panel {
+    padding: 15px;
+  }
+
+  .form-panel h2 {
+    font-size: 16px;
+  }
+
+  .hint {
+    font-size: 12px;
+
+    line-height: 1.55;
+  }
+
+  .field-label {
+    font-size: 12px;
+  }
+
+  .reg-prefix {
+    padding: 0 8px;
+
+    font-size: 12px;
+  }
+
+  #registrationInput {
+    font-size: 13px;
+
+    padding: 10px 8px;
+  }
+
+  .select-input {
+    font-size: 13px;
+
+    padding: 10px;
+  }
+
+  .message-box {
+    font-size: 12px;
+
+    padding: 9px 10px;
+  }
+
+  /*
+    400px preview
+  */
+
+  .cert-preview-wrap {
+    width: 100%;
+
+    aspect-ratio: 3 / 2;
+  }
+
+  /*
+    400 / 1536 = 0.2604166667
+  */
+
+  .cert-scaler {
+    transform: scale(0.2604166667);
+  }
+}
+
+/* =====================================================
+   VERY SMALL MOBILE
+   360px এর নিচে
+===================================================== */
+
+@media (max-width: 359px) {
+  .topbar {
+    padding: 10px;
+  }
+
+  .topbar-titles h1 {
+    font-size: 15px;
+  }
+
+  .status-pill {
+    width: 25px;
+
+    height: 25px;
+  }
+
+  .layout {
+    padding: 12px 8px 30px;
+  }
+
+  .panel {
+    padding: 13px;
+  }
+
+  .reg-prefix {
+    padding: 0 6px;
+
+    font-size: 11px;
+  }
+
+  #registrationInput {
+    font-size: 12px;
+
+    padding: 9px 7px;
+  }
+
+  .btn {
+    font-size: 13px;
+  }
+
+  /*
+    320px preview
+  */
+
+  .cert-preview-wrap {
+    width: 100%;
+
+    aspect-ratio: 3 / 2;
+  }
+
+  /*
+    320 / 1536 = 0.2083333333
+  */
+
+  .cert-scaler {
+    transform: scale(0.2083333333);
+  }
+}
+
+/* =====================================================
+   LANDSCAPE MOBILE
+===================================================== */
+
+@media (max-width: 990px) and (orientation: landscape) {
+  .topbar {
+    position: relative;
+  }
+
+  .layout {
+    padding-top: 20px;
+  }
+
+  .cert-preview-wrap {
+    max-height: 75vh;
+
+    aspect-ratio: 3 / 2;
+  }
+}
+
+/* =====================================================
+   GLOBAL MEDIA SAFETY
+===================================================== */
+
+img,
+canvas,
+svg,
+video {
+  max-width: 100%;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--orange);
+
+  outline-offset: 2px;
 }
