@@ -1,0 +1,489 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Fee Management | KWKMA Admin</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
+
+    <!-- COMMON DASHBOARD CSS -->
+    <link rel="stylesheet" href="./css/dashboard.css" />
+
+    <!--  -->
+    <link rel="stylesheet" href="./css/total-students.css" />
+
+    <!-- FEE MANAGEMENT CSS -->
+    <link rel="stylesheet" href="./css/fee-management.css" />
+  </head>
+
+  <body>
+    <!-- =========================================
+         SIDEBAR START
+    ========================================== -->
+
+    <div id="commonSidebar"></div>
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="main-content">
+      <!-- =========================================
+           TOPBAR
+      ========================================== -->
+
+      <header class="topbar">
+        <div class="top-left">
+          <button class="mobile-menu" id="mobileMenu" type="button">☰</button>
+
+          <div>
+            <div class="page-label">FINANCIAL MANAGEMENT</div>
+
+            <h1>Fee Management</h1>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <div class="system-status">
+            <span></span>
+
+            Firebase Connected
+          </div>
+        </div>
+      </header>
+
+      <!-- =========================================
+           PAGE CONTENT
+      ========================================== -->
+
+      <section class="page-content">
+        <!-- =========================================
+             PAGE HEADING
+        ========================================== -->
+
+        <div class="page-heading">
+          <div>
+            <div class="section-label">KWKMA PAYMENT MANAGEMENT</div>
+
+            <h2>Fee Management</h2>
+
+            <p>Manage admission fees, monthly fees and belt exam fees.</p>
+          </div>
+
+          <div class="page-actions">
+            <button class="refresh-btn" id="refreshBtn" type="button">
+              <i class="fa-solid fa-rotate-right"></i>
+
+              Refresh
+            </button>
+
+            <button class="collect-btn" id="collectMoneyBtn" type="button">
+              <i class="fa-solid fa-plus"></i>
+
+              Collect Money
+            </button>
+          </div>
+        </div>
+
+        <!-- =========================================
+             FINANCIAL STATS
+        ========================================== -->
+
+        <div class="fee-stats">
+          <!-- TOTAL COLLECTION -->
+
+          <div class="fee-stat-card">
+            <div class="fee-stat-icon total-icon">
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+
+            <div class="fee-stat-info">
+              <span>Total Collection</span>
+
+              <strong id="totalCollection">৳ 0</strong>
+
+              <small>All time collection</small>
+            </div>
+          </div>
+
+          <!-- ADMISSION FEE -->
+
+          <div class="fee-stat-card">
+            <div class="fee-stat-icon admission-icon">
+              <i class="fa-solid fa-user-plus"></i>
+            </div>
+
+            <div class="fee-stat-info">
+              <span>Admission Fee</span>
+
+              <strong id="admissionCollection">৳ 0</strong>
+
+              <small>Total admission collection</small>
+            </div>
+          </div>
+
+          <!-- MONTHLY FEE -->
+
+          <div class="fee-stat-card">
+            <div class="fee-stat-icon monthly-icon">
+              <i class="fa-solid fa-calendar-check"></i>
+            </div>
+
+            <div class="fee-stat-info">
+              <span>This Month</span>
+
+              <strong id="monthlyCollection">৳ 0</strong>
+
+              <small id="currentMonthLabel"> Monthly fee collection </small>
+            </div>
+          </div>
+
+          <!-- BELT EXAM -->
+
+          <div class="fee-stat-card">
+            <div class="fee-stat-icon belt-icon">
+              <i class="fa-solid fa-medal"></i>
+            </div>
+
+            <div class="fee-stat-info">
+              <span>Belt Exam Fee</span>
+
+              <strong id="beltCollection">৳ 0</strong>
+
+              <small>Total belt exam collection</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================
+             RECENT PAYMENT TABLE
+        ========================================== -->
+
+        <div class="table-card">
+          <div class="table-header">
+            <div>
+              <h3>Payment History</h3>
+
+              <span id="tableStatus"> Loading payment history... </span>
+            </div>
+
+            <div class="table-search">
+              <input
+                type="search"
+                id="searchInput"
+                placeholder="Search registration ID, student or fee..."
+              />
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+
+                  <th>Registration ID</th>
+
+                  <th>Student</th>
+
+                  <th>Fee Type</th>
+
+                  <th>Month / Belt</th>
+
+                  <th>Amount</th>
+
+                  <th>Payment Method</th>
+
+                  <th>Payment Date</th>
+
+                  <th>Status</th>
+
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="paymentTableBody"></tbody>
+            </table>
+
+            <!-- EMPTY STATE -->
+
+            <div class="empty-state hidden" id="emptyState">
+              <div class="empty-icon">
+                <i class="fa-solid fa-money-bill-wave"></i>
+              </div>
+
+              <h3>No Payment Found</h3>
+
+              <p>There are currently no payment records.</p>
+            </div>
+
+            <!-- LOADING STATE -->
+
+            <div class="loading-state" id="loadingState">
+              <div class="loader"></div>
+
+              <p>Loading payment records...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================================
+         COLLECT MONEY MODAL
+    ========================================== -->
+
+    <div class="fee-modal-overlay hidden" id="collectMoneyModal">
+      <div class="fee-modal">
+        <!-- MODAL HEADER -->
+
+        <div class="fee-modal-header">
+          <div>
+            <span class="modal-eyebrow"> KWKMA • PAYMENT COLLECTION </span>
+
+            <h2>Collect Money</h2>
+
+            <p>Select a student and collect the required fee.</p>
+          </div>
+
+          <button type="button" class="fee-modal-close" id="collectModalClose">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- MODAL BODY -->
+
+        <div class="fee-modal-body">
+          <!-- STUDENT -->
+
+          <div class="form-group">
+            <label>
+              <i class="fa-solid fa-id-card"></i>
+              Registration ID
+            </label>
+
+            <div class="registration-input">
+              <span>KWKMA-</span>
+              <input
+                type="text"
+                id="registrationNumber"
+                inputmode="numeric"
+                pattern="[0-9]*"
+                maxlength="6"
+                placeholder="Enter number"
+                autocomplete="off"
+              />
+            </div>
+
+            <small> Only registration number required. Example: 01 </small>
+          </div>
+
+          <!-- AUTO STUDENT -->
+          <div id="selectedStudentInfo" class="selected-student hidden">
+            <div class="selected-student-icon">
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div>
+              <strong id="selectedStudentName">-</strong>
+              <span id="selectedStudentReg">-</span>
+            </div>
+          </div>
+          <!-- STUDENT INFO -->
+
+          <div class="selected-student hidden" id="selectedStudentInfo">
+            <div class="selected-student-icon">
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div>
+              <strong id="selectedStudentName"> Student Name </strong>
+
+              <span id="selectedStudentReg"> KWKMA-00 </span>
+            </div>
+          </div>
+
+          <!-- FEE TYPE -->
+
+          <div class="form-group">
+            <label for="feeType">
+              <i class="fa-solid fa-money-check-dollar"></i>
+
+              Fee Type
+            </label>
+
+            <select id="feeType">
+              <option value="">Select Fee Type</option>
+
+              <option value="admission">Admission Fee</option>
+
+              <option value="monthly">Monthly Fee</option>
+
+              <option value="belt">Belt Exam Fee</option>
+            </select>
+          </div>
+
+          <!-- MONTH FIELD -->
+
+          <div class="form-group conditional-field hidden" id="monthField">
+            <label for="paymentMonth">
+              <i class="fa-solid fa-calendar-days"></i>
+
+              Select Month
+            </label>
+
+            <input type="month" id="paymentMonth" />
+          </div>
+
+          <!-- BELT FIELD -->
+
+          <div class="form-group conditional-field hidden" id="beltField">
+            <label for="examBelt">
+              <i class="fa-solid fa-medal"></i>
+
+              Select Belt
+            </label>
+
+            <select id="examBelt">
+              <option value="">Select Belt</option>
+
+              <option value="Red Belt">Red Belt</option>
+
+              <option value="Yellow Belt">Yellow Belt</option>
+
+              <option value="Orange Belt">Orange Belt</option>
+
+              <option value="Green Belt">Green Belt</option>
+
+              <option value="Blue Belt">Blue Belt</option>
+
+              <option value="Brown Belt">Brown Belt</option>
+
+              <option value="Black Belt">Black Belt</option>
+            </select>
+          </div>
+
+          <!-- AMOUNT -->
+
+          <div class="form-group">
+            <label for="amount">
+              <i class="fa-solid fa-bangladeshi-taka-sign"></i>
+
+              Amount
+            </label>
+
+            <div class="amount-input">
+              <span>৳</span>
+
+              <input type="number" id="amount" placeholder="0" min="0" />
+            </div>
+
+            <small id="amountHint">
+              Select a fee type to set the amount.
+            </small>
+          </div>
+
+          <!-- PAYMENT METHOD -->
+
+          <div class="form-group">
+            <label for="paymentMethod">
+              <i class="fa-solid fa-credit-card"></i>
+
+              Payment Method
+            </label>
+
+            <select id="paymentMethod">
+              <option value="cash">Cash</option>
+
+              <option value="bkash">bKash</option>
+
+              <option value="nagad">Nagad</option>
+
+              <option value="bank">Bank Transfer</option>
+
+              <option value="online">Online Payment</option>
+            </select>
+          </div>
+
+          <!-- NOTE -->
+
+          <div class="form-group">
+            <label for="paymentNote">
+              <i class="fa-solid fa-note-sticky"></i>
+
+              Note
+              <span class="optional-text"> Optional </span>
+            </label>
+
+            <textarea
+              id="paymentNote"
+              rows="3"
+              placeholder="Add payment note if needed..."
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- MODAL FOOTER -->
+
+        <div class="fee-modal-footer">
+          <button type="button" class="cancel-btn" id="cancelCollectBtn">
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            class="confirm-collect-btn"
+            id="confirmCollectBtn"
+          >
+            <i class="fa-solid fa-check"></i>
+
+            <span>Collect Money</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================
+         SUCCESS MODAL
+    ========================================== -->
+
+    <div class="success-modal-overlay hidden" id="successModal">
+      <div class="success-modal">
+        <div class="success-icon">
+          <i class="fa-solid fa-check"></i>
+        </div>
+
+        <h2>Payment Collected!</h2>
+
+        <p id="successMessage">Payment has been successfully recorded.</p>
+
+        <div class="success-transaction">
+          <span>Transaction ID</span>
+
+          <strong id="successTransactionId"> KWKMA-TXN-000000 </strong>
+        </div>
+
+        <button type="button" class="success-close-btn" id="successCloseBtn">
+          Done
+        </button>
+      </div>
+    </div>
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script type="module" src="./js/common-sidebar.js"></script>
+
+    <script type="module" src="./js/fee-management.js"></script>
+  </body>
+</html>

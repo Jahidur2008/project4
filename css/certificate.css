@@ -1,0 +1,321 @@
+@font-face {
+  font-family: "FELIXTI";
+  src: url("../fonts/FELIXTI.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "OPTIOldFashionedScript";
+  src: url("../fonts/OPTIOldFashioned-Script.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "cataneo-bt";
+  src: url("../fonts/cataneo-bt.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --bg: #f4f5f9;
+  --panel: #ffffff;
+  --panel-border: #e4e6ee;
+  --orange: #f5941f;
+  --orange-soft: #f5941f22;
+  --text: #1c1f2a;
+  --text-dim: #6b7280;
+  --danger: #dc2626;
+  --success: #16a34a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- top bar ---------- */
+.topbar {
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--panel-border);
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--panel-border);
+  background: #f8f9fc;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.back-btn:hover {
+  background: var(--orange-soft);
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.topbar-titles p.eyebrow {
+  margin: 0 0 4px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #e11d48;
+  text-transform: uppercase;
+}
+.topbar-titles h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #e9f9ef;
+  color: #16a34a;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 0 3px #16a34a22;
+}
+
+/* ---------- layout ---------- */
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 1px 3px rgba(20, 20, 40, 0.04);
+}
+
+.form-panel h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+.hint {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+.hint.small {
+  font-size: 11.5px;
+  margin: 14px 0 0;
+}
+
+.field-label {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.reg-input-group {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f8f9fc;
+}
+.reg-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: #eef0f6;
+  color: var(--orange);
+  font-weight: 700;
+  font-size: 14px;
+  border-right: 1px solid var(--panel-border);
+  white-space: nowrap;
+}
+#registrationInput {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+  padding: 12px;
+}
+
+.select-input {
+  width: 100%;
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  background: #f8f9fc;
+  color: var(--text);
+  font-size: 15px;
+  padding: 12px;
+  outline: none;
+  margin-top: 8px;
+  cursor: pointer;
+}
+.select-input:focus,
+#registrationInput:focus {
+  outline: 2px solid var(--orange-soft);
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    transform 0.06s ease,
+    opacity 0.2s ease;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ffb347, var(--orange));
+  color: #1a1005;
+}
+.btn-ghost {
+  background: #f4f5f9;
+  border-color: var(--panel-border);
+  color: var(--text);
+}
+.btn-download {
+  border: 1px solid var(--orange);
+  background: #fff8ef;
+  color: var(--orange);
+  font-weight: 700;
+}
+.btn-download:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.message-box {
+  margin: 16px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  background: #f4f5f9;
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+}
+.message-box.error {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: #fef2f2;
+}
+.message-box.success {
+  color: var(--success);
+  border-color: var(--success);
+  background: #f0fdf4;
+}
+
+/* ---------- preview panel ---------- */
+.preview-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Certificate is landscape 1536x1024 (3:2). Scaled down for on-screen
+   preview; the download logic captures a full-size offscreen clone,
+   so this scaling never affects output quality. */
+.cert-preview-wrap {
+  width: 560px;
+  height: 373px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--panel-border);
+  background: #000;
+}
+.cert-scaler {
+  transform: scale(0.3645);
+  transform-origin: top left;
+}
+@media (max-width: 620px) {
+  .cert-preview-wrap {
+    width: 320px;
+    height: 213px;
+  }
+  .cert-scaler {
+    transform: scale(0.2083);
+  }
+}
+
+.download-row {
+  margin-top: 22px;
+}

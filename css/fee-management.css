@@ -1,0 +1,936 @@
+/* =========================================
+   FEE MANAGEMENT PAGE
+========================================= */
+
+.page-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.collect-btn {
+  border: none;
+  background: #c51a30;
+  color: #fff;
+  padding: 11px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.25s ease;
+  box-shadow: 0 8px 20px rgba(197, 26, 48, 0.2);
+}
+
+.collect-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(197, 26, 48, 0.3);
+}
+
+.collect-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   FEE STATISTICS
+========================================= */
+
+.fee-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.fee-stat-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 115px;
+  transition: 0.25s ease;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.03);
+}
+
+.fee-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+}
+
+.fee-stat-icon {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+
+.total-icon {
+  background: rgba(211, 160, 81, 0.15);
+  color: #d3a051;
+}
+
+.admission-icon {
+  background: rgba(197, 26, 48, 0.1);
+  color: #c51a30;
+}
+
+.monthly-icon {
+  background: rgba(25, 135, 84, 0.1);
+  color: #198754;
+}
+
+.belt-icon {
+  background: rgba(8, 9, 8, 0.08);
+  color: #080908;
+}
+
+.fee-stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.fee-stat-info span {
+  color: #777;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.fee-stat-info strong {
+  color: #161616;
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.fee-stat-info small {
+  color: #aaa;
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+/* =========================================
+   PAYMENT STATUS
+========================================= */
+
+.payment-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.payment-status.paid {
+  background: rgba(25, 135, 84, 0.1);
+  color: #198754;
+}
+
+.payment-status.pending {
+  background: rgba(255, 193, 7, 0.15);
+  color: #b58100;
+}
+
+/* =========================================
+   FEE TYPE BADGE
+========================================= */
+
+.fee-type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.fee-type-badge.admission {
+  background: rgba(197, 26, 48, 0.1);
+  color: #c51a30;
+}
+
+.fee-type-badge.monthly {
+  background: rgba(25, 135, 84, 0.1);
+  color: #198754;
+}
+
+.fee-type-badge.belt {
+  background: rgba(211, 160, 81, 0.16);
+  color: #9b6b21;
+}
+
+/* =========================================
+   PAYMENT AMOUNT
+========================================= */
+
+.payment-amount {
+  font-weight: 800;
+  color: #198754;
+}
+
+/* =========================================
+   MODAL OVERLAY
+========================================= */
+
+.fee-modal-overlay,
+.success-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 9, 8, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.fee-modal-overlay.hidden,
+.success-modal-overlay.hidden {
+  display: none;
+}
+
+/* =========================================
+   COLLECT MONEY MODAL
+========================================= */
+
+.fee-modal {
+  width: 100%;
+  max-width: 570px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+  animation: feeModalShow 0.25s ease;
+}
+
+@keyframes feeModalShow {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================
+   MODAL HEADER
+========================================= */
+
+.fee-modal-header {
+  padding: 25px 28px 22px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.modal-eyebrow {
+  display: block;
+  color: #c51a30;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.fee-modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #111;
+}
+
+.fee-modal-header p {
+  margin: 7px 0 0;
+  font-size: 13px;
+  color: #888;
+}
+
+.fee-modal-close {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border: none;
+  background: #f5f5f5;
+  color: #444;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.fee-modal-close:hover {
+  background: #c51a30;
+  color: #fff;
+}
+
+/* =========================================
+   MODAL BODY
+========================================= */
+
+.fee-modal-body {
+  padding: 25px 28px;
+}
+
+.form-group {
+  margin-bottom: 19px;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #333;
+}
+
+.form-group label i {
+  color: #c51a30;
+  font-size: 13px;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+  color: #222;
+  transition: 0.2s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #d3a051;
+  box-shadow: 0 0 0 3px rgba(211, 160, 81, 0.12);
+}
+
+.form-group small {
+  display: block;
+  margin-top: 7px;
+  color: #999;
+  font-size: 11px;
+}
+
+.optional-text {
+  color: #aaa;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+/* =========================================
+   CONDITIONAL FIELD
+========================================= */
+
+.conditional-field.hidden {
+  display: none;
+}
+
+/* =========================================
+   AMOUNT INPUT
+========================================= */
+
+.amount-input {
+  position: relative;
+}
+
+.amount-input span {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #198754;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.amount-input input {
+  padding-left: 38px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* =========================================
+   SELECTED STUDENT
+========================================= */
+
+.selected-student {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(211, 160, 81, 0.1);
+  border: 1px solid rgba(211, 160, 81, 0.25);
+  border-radius: 12px;
+  padding: 13px;
+  margin-bottom: 20px;
+}
+
+.selected-student.hidden {
+  display: none;
+}
+
+.selected-student-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #d3a051;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected-student div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.selected-student strong {
+  color: #222;
+  font-size: 14px;
+}
+
+.selected-student span {
+  color: #888;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+/* =========================================
+   MODAL FOOTER
+========================================= */
+
+.fee-modal-footer {
+  border-top: 1px solid #eee;
+  padding: 18px 28px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cancel-btn,
+.confirm-collect-btn {
+  border: none;
+  padding: 11px 19px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cancel-btn {
+  background: #f2f2f2;
+  color: #555;
+}
+
+.cancel-btn:hover {
+  background: #e5e5e5;
+}
+
+.confirm-collect-btn {
+  background: #c51a30;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.confirm-collect-btn:hover {
+  background: #a91427;
+  transform: translateY(-1px);
+}
+
+.confirm-collect-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================
+   SUCCESS MODAL
+========================================= */
+
+.success-modal {
+  width: 100%;
+  max-width: 390px;
+  background: #fff;
+  border-radius: 22px;
+  padding: 35px 30px;
+  text-align: center;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+  animation: feeModalShow 0.25s ease;
+}
+
+.success-icon {
+  width: 65px;
+  height: 65px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: rgba(25, 135, 84, 0.12);
+  color: #198754;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+}
+
+.success-modal h2 {
+  margin: 0;
+  color: #222;
+  font-size: 23px;
+}
+
+.success-modal p {
+  margin: 9px 0 20px;
+  color: #888;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.success-transaction {
+  background: #f8f8f8;
+  border: 1px dashed #ddd;
+  border-radius: 12px;
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.success-transaction span {
+  color: #999;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.success-transaction strong {
+  color: #c51a30;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.success-close-btn {
+  width: 100%;
+  border: none;
+  background: #080908;
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.success-close-btn:hover {
+  background: #c51a30;
+}
+
+/* =========================================
+   FEE TABLE
+========================================= */
+
+.table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-wrapper table th,
+.table-wrapper table td {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.table-wrapper .fee-type-badge,
+.table-wrapper .payment-status {
+  justify-content: center;
+}
+
+.table-wrapper .payment-amount {
+  white-space: nowrap;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1200px) {
+  .fee-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .page-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .page-actions {
+    width: 100%;
+  }
+
+  .page-actions button {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .fee-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .fee-stat-card {
+    min-height: 95px;
+    padding: 16px;
+  }
+
+  .fee-modal-overlay,
+  .success-modal-overlay {
+    padding: 10px;
+    align-items: flex-end;
+  }
+
+  .fee-modal {
+    max-height: calc(100vh - 20px);
+    border-radius: 18px 18px 12px 12px;
+  }
+
+  .fee-modal-header {
+    padding: 20px;
+  }
+
+  .fee-modal-header h2 {
+    font-size: 21px;
+  }
+
+  .fee-modal-body {
+    padding: 20px;
+  }
+
+  .fee-modal-footer {
+    padding: 15px 20px;
+  }
+
+  .cancel-btn,
+  .confirm-collect-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .page-actions {
+    flex-direction: column;
+  }
+
+  .page-actions button {
+    width: 100%;
+  }
+
+  .fee-modal-footer {
+    flex-direction: column;
+  }
+
+  .fee-stat-info strong {
+    font-size: 20px;
+  }
+}
+
+/* =========================================
+   PAYMENT TABLE - RESPONSIVE LOADING FIX
+========================================= */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Payment table minimum width */
+.table-wrapper table {
+  min-width: 950px;
+}
+
+/* Loading State */
+#loadingState {
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+#loadingState i {
+  font-size: 26px;
+  color: var(--gold);
+}
+
+#loadingState span,
+#loadingState p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Empty State */
+#emptyState {
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 14px;
+  }
+
+  .table-wrapper table {
+    min-width: 900px;
+  }
+
+  #loadingState,
+  #emptyState {
+    min-height: 200px;
+    padding: 25px 15px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 12px;
+  }
+
+  .table-wrapper table {
+    min-width: 850px;
+  }
+
+  #loadingState {
+    min-height: 180px;
+    padding: 25px 12px;
+  }
+
+  #loadingState i {
+    font-size: 23px;
+  }
+
+  #loadingState span,
+  #loadingState p {
+    font-size: 11px;
+  }
+
+  #emptyState {
+    min-height: 180px;
+    padding: 25px 12px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+  .table-wrapper {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .table-wrapper table {
+    min-width: 800px;
+  }
+
+  #loadingState {
+    min-height: 160px;
+    padding: 20px 10px;
+  }
+
+  #loadingState i {
+    font-size: 21px;
+  }
+
+  #loadingState span,
+  #loadingState p {
+    font-size: 10px;
+  }
+
+  #emptyState {
+    min-height: 160px;
+  }
+}
+
+/* =========================================
+   REGISTRATION ID INPUT
+========================================= */
+
+.registration-input {
+  position: relative;
+  width: 100%;
+}
+
+.registration-input span {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #c51a30;
+  font-size: 14px;
+  font-weight: 800;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.registration-input input {
+  padding-left: 85px !important;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+.registration-input input:focus {
+  border-color: #d3a051;
+  box-shadow: 0 0 0 3px rgba(211, 160, 81, 0.12);
+}
+
+/* Student found */
+
+#selectedStudentInfo {
+  animation: studentFound 0.2s ease;
+}
+
+@keyframes studentFound {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Registration error */
+
+.registration-error {
+  display: block;
+  margin-top: 7px;
+  color: #c51a30;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Mobile */
+
+@media (max-width: 420px) {
+  .registration-input input {
+    padding-left: 72px !important;
+  }
+
+  .registration-input span {
+    font-size: 13px;
+  }
+}
+
+/* =========================================
+   PAYMENT DELETE BUTTON
+========================================= */
+
+.payment-delete-btn {
+  border: none;
+  background: rgba(197, 26, 48, 0.08);
+  color: #c51a30;
+  padding: 7px 11px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  transition: 0.2s ease;
+}
+
+.payment-delete-btn:hover {
+  background: #c51a30;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.payment-delete-btn:active {
+  transform: translateY(0);
+}
+
+.payment-delete-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.payment-delete-btn i {
+  font-size: 11px;
+}
+
+@media (max-width: 700px) {
+  .payment-delete-btn {
+    padding: 7px 9px;
+  }
+
+  .payment-delete-btn span {
+    display: none;
+  }
+
+  .payment-delete-btn i {
+    font-size: 12px;
+  }
+}

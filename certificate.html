@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KWKMA — Certificate Generator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="./css/certificate.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="back-btn" id="backBtn">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <div class="topbar-titles">
+          <p class="eyebrow">CERTIFICATE GENERATOR</p>
+          <h1>Student Certificate</h1>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <span class="status-pill">
+          <span class="status-dot"></span>
+          Firebase Connected
+        </span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- LEFT: lookup panel -->
+      <section class="panel form-panel">
+        <h2>Registration ও Belt সিলেক্ট করুন</h2>
+        <p class="hint">
+          Registration No. দিন এবং belt নির্বাচন করুন — সেই belt এর মার্ক ও
+          সার্টিফিকেট ডিজাইন বসে যাবে।
+        </p>
+
+        <label class="field-label" for="registrationInput"
+          >Registration No.</label
+        >
+        <div class="reg-input-group">
+          <span class="reg-prefix">KWKMA-</span>
+          <input
+            type="text"
+            id="registrationInput"
+            placeholder="যেমন: 0125"
+            inputmode="numeric"
+            autocomplete="off"
+          />
+        </div>
+
+        <label class="field-label" for="beltSelect" style="margin-top: 16px">
+          Belt
+        </label>
+        <select id="beltSelect" class="select-input">
+          <option value="" disabled selected>Belt নির্বাচন করুন</option>
+          <option value="yellow">Yellow Belt</option>
+          <option value="orange">Orange Belt</option>
+          <option value="green">Green Belt</option>
+          <option value="blue">Blue Belt</option>
+          <option value="brown">Brown Belt</option>
+          <option value="black">Black Belt</option>
+        </select>
+
+        <div class="btn-row">
+          <button id="generateBtn" class="btn btn-primary" type="button">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            Generate Certificate
+          </button>
+          <button id="resetBtn" class="btn btn-ghost" type="button">
+            Reset
+          </button>
+        </div>
+
+        <p id="messageBox" class="message-box hidden"></p>
+      </section>
+
+      <!-- RIGHT: certificate preview -->
+      <section id="previewSection" class="panel preview-panel hidden">
+        <div class="cert-preview-wrap">
+          <div class="cert-scaler">
+            <div id="certificate"></div>
+          </div>
+        </div>
+
+        <div class="btn-row download-row">
+          <button id="downloadPngBtn" class="btn btn-download" type="button">
+            <i class="fa-solid fa-image"></i>
+            Download PNG
+          </button>
+          <button id="downloadPdfBtn" class="btn btn-download" type="button">
+            <i class="fa-solid fa-file-pdf"></i>
+            Download PDF
+          </button>
+        </div>
+        <p class="hint small">
+          Certificate size: 1536 × 1024 px — ডাউনলোড হওয়া ফাইলের সাইজ/রেশিও
+          সবসময় ফিক্সড।
+        </p>
+      </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script type="module" src="./js/certificate.js"></script>
+  </body>
+</html>

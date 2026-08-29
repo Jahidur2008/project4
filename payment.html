@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="KWKMA Student Payment System" />
+
+    <title>Payment | KWKMA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link rel="shortcut icon" href="./images/fav.png" type="image/x-icon" />
+
+    <!-- Existing Main CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Payment CSS -->
+    <link rel="stylesheet" href="css/payment.css" />
+  </head>
+
+  <body>
+    <!-- ================= HEADER ================= -->
+
+    <header class="navbar" id="navbar">
+      <div class="nav-container">
+        <a class="brand" href="./index.html#home" aria-label="KWKMA Home">
+          <img src="images/logo.png" alt="KWKMA Logo" />
+
+          <div class="brand-text">
+            <strong>KWKMA</strong>
+            <span>KUSHTIA WUSHU KUNG-FU MARTIAL ART ACADEMY</span>
+          </div>
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+          <a class="nav-link" href="./index.html#home"> Home </a>
+
+          <a class="nav-link" href="./index.html#teacher"> Teacher </a>
+
+          <a class="nav-link" href="./index.html#beltRanking"> Belt Ranking </a>
+
+          <a class="nav-link" href="./index.html#classFees"> Classes & Fees </a>
+
+          <a class="nav-link" href="./index.html#gallery"> Gallery </a>
+
+          <a class="nav-link active" href="./payment.html"> Payment </a>
+
+          <a class="nav-link" href="./index.html#contact"> Contact </a>
+
+          <a class="unique-btn nav-unique-btn" href="./admission.html">
+            Admission
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ================= PAYMENT ================= -->
+
+    <main class="payment-page">
+      <!-- TOP AREA -->
+
+      <section class="payment-hero">
+        <div class="container">
+          <div class="payment-heading">
+            <div class="payment-icon">
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+
+            <span class="payment-small-title"> SECURE PAYMENT SYSTEM </span>
+
+            <h1>
+              Make Your
+              <strong>Payment</strong>
+            </h1>
+
+            <p>
+              আপনার Registration ID দিয়ে তথ্য যাচাই করে নিরাপদে KWKMA-এর ফি
+              প্রদান করুন।
+            </p>
+          </div>
+
+          <!-- PAYMENT CARD -->
+
+          <div class="payment-wrapper">
+            <!-- LEFT SIDE -->
+
+            <div class="payment-main-card">
+              <!-- STEP 1 -->
+
+              <div class="payment-step">
+                <div class="step-header">
+                  <div class="step-number">1</div>
+
+                  <div>
+                    <span>STUDENT INFORMATION</span>
+                    <h3>Registration Verification</h3>
+                  </div>
+                </div>
+
+                <div class="registration-box">
+                  <label for="registrationInput"> Registration ID </label>
+
+                  <div class="registration-input-wrap">
+                    <div class="registration-prefix">KWKMA-</div>
+
+                    <input
+                      type="text"
+                      id="registrationInput"
+                      placeholder="01"
+                      autocomplete="off"
+                    />
+                  </div>
+
+                  <small> আপনার Registration Number লিখুন </small>
+                </div>
+
+                <!-- STUDENT RESULT -->
+
+                <div class="student-info-card" id="studentInfoCard" hidden>
+                  <div class="student-avatar">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+
+                  <div class="student-details">
+                    <span>STUDENT VERIFIED</span>
+
+                    <h3 id="studentName">Student Name</h3>
+
+                    <p id="studentRegistration">KWKMA-01</p>
+                  </div>
+
+                  <div class="verified-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                  </div>
+                </div>
+
+                <!-- ERROR -->
+
+                <div class="payment-error" id="studentError" hidden>
+                  <i class="fa-solid fa-circle-exclamation"></i>
+
+                  <span> Registration ID পাওয়া যায়নি </span>
+                </div>
+              </div>
+
+              <!-- STEP 2 -->
+
+              <div
+                class="payment-step payment-disabled"
+                id="paymentTypeSection"
+              >
+                <div class="step-header">
+                  <div class="step-number">2</div>
+
+                  <div>
+                    <span>PAYMENT TYPE</span>
+
+                    <h3>আপনি কোন ফি প্রদান করবেন?</h3>
+                  </div>
+                </div>
+
+                <div class="payment-type-grid">
+                  <!-- BELT -->
+
+                  <button
+                    type="button"
+                    class="payment-type-card"
+                    data-type="belt"
+                  >
+                    <div class="payment-type-icon">
+                      <i class="fa-solid fa-medal"></i>
+                    </div>
+
+                    <div>
+                      <h4>Belt Exam Fee</h4>
+
+                      <p>Belt পরীক্ষার ফি প্রদান করুন</p>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+
+                  <!-- MONTHLY -->
+
+                  <button
+                    type="button"
+                    class="payment-type-card"
+                    data-type="monthly"
+                  >
+                    <div class="payment-type-icon">
+                      <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+
+                    <div>
+                      <h4>Monthly Fee</h4>
+
+                      <p>মাসিক প্রশিক্ষণ ফি প্রদান করুন</p>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- STEP 3 -->
+
+              <div
+                class="payment-step payment-disabled"
+                id="paymentDetailsSection"
+              >
+                <div class="step-header">
+                  <div class="step-number">3</div>
+
+                  <div>
+                    <span>PAYMENT DETAILS</span>
+
+                    <h3>Payment Information</h3>
+                  </div>
+                </div>
+
+                <!-- BELT OPTION -->
+
+                <div class="payment-details" id="beltPaymentDetails" hidden>
+                  <div class="payment-field">
+                    <label for="beltSelect"> Select Belt </label>
+
+                    <select id="beltSelect">
+                      <option value="">Select Belt</option>
+
+                      <option value="Red Belt">Red Belt</option>
+
+                      <option value="Yellow Belt">Yellow Belt</option>
+
+                      <option value="Orange Belt">Orange Belt</option>
+
+                      <option value="Green Belt">Green Belt</option>
+
+                      <option value="Blue Belt">Blue Belt</option>
+
+                      <option value="Brown Belt">Brown Belt</option>
+
+                      <option value="Black Belt">Black Belt</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- MONTHLY OPTION -->
+
+                <div class="payment-details" id="monthlyPaymentDetails" hidden>
+                  <div class="payment-field">
+                    <label for="monthSelect"> Select Month </label>
+
+                    <select id="monthSelect">
+                      <option value="">Select Month</option>
+
+                      <option value="January">January</option>
+
+                      <option value="February">February</option>
+
+                      <option value="March">March</option>
+
+                      <option value="April">April</option>
+
+                      <option value="May">May</option>
+
+                      <option value="June">June</option>
+
+                      <option value="July">July</option>
+
+                      <option value="August">August</option>
+
+                      <option value="September">September</option>
+
+                      <option value="October">October</option>
+
+                      <option value="November">November</option>
+
+                      <option value="December">December</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- AMOUNT -->
+
+                <div class="payment-amount-box" id="paymentAmountBox" hidden>
+                  <div>
+                    <span> TOTAL PAYABLE </span>
+
+                    <strong id="paymentAmount"> ৳ 0 </strong>
+                  </div>
+
+                  <div class="amount-icon">
+                    <i class="fa-solid fa-bangladeshi-taka-sign"></i>
+                  </div>
+                </div>
+
+                <!-- PAY BUTTON -->
+
+                <button
+                  type="button"
+                  class="pay-now-btn"
+                  id="payNowBtn"
+                  disabled
+                >
+                  <span> Pay Now </span>
+
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- RIGHT SIDE SUMMARY -->
+
+            <aside class="payment-summary">
+              <div class="summary-top">
+                <div class="summary-icon">
+                  <i class="fa-solid fa-receipt"></i>
+                </div>
+
+                <div>
+                  <span> PAYMENT SUMMARY </span>
+
+                  <h3>Order Details</h3>
+                </div>
+              </div>
+
+              <div class="summary-list">
+                <div class="summary-item">
+                  <span> Student </span>
+
+                  <strong id="summaryStudent"> — </strong>
+                </div>
+
+                <div class="summary-item">
+                  <span> Registration ID </span>
+
+                  <strong id="summaryRegistration"> — </strong>
+                </div>
+
+                <div class="summary-item">
+                  <span> Payment For </span>
+
+                  <strong id="summaryType"> — </strong>
+                </div>
+
+                <div class="summary-item">
+                  <span> Belt / Month </span>
+
+                  <strong id="summaryDetails"> — </strong>
+                </div>
+              </div>
+
+              <div class="summary-total">
+                <span> Total Amount </span>
+
+                <strong id="summaryAmount"> ৳ 0 </strong>
+              </div>
+
+              <div class="payment-security">
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <p>আপনার Payment Information নিরাপদভাবে প্রক্রিয়া করা হবে।</p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+      <div class="container footer-top">
+        <div class="footer-brand">
+          <img src="images/logo.png" alt="KWKMA Logo" />
+
+          <div>
+            <strong> KWKMA </strong>
+
+            <p>Kushtia Wushu Kung-Fu Martial Art Academy</p>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+
+          <a href="./index.html#home"> Home </a>
+
+          <a href="./index.html#about"> About </a>
+
+          <a href="./index.html#teacher"> Teacher </a>
+
+          <a href="./index.html#beltRanking"> Belt Ranking </a>
+
+          <a href="./index.html#classFees"> Classes & Fees </a>
+
+          <a href="./index.html#gallery"> Gallery </a>
+
+          <a href="./payment.html"> Payment </a>
+
+          <a href="./index.html#contact"> Contact </a>
+
+          <a href="./admin.html"> Admin </a>
+        </div>
+
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+
+          <div>
+            <a href="#">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <a href="#">
+              <i class="fab fa-youtube"></i>
+            </a>
+
+            <a href="#">
+              <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="#">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <span>
+          © <span id="year"></span>
+          KWKMA. All Rights Reserved.
+        </span>
+
+        <span> Martial Arts • Discipline • Confidence </span>
+      </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- EXISTING SCRIPT -->
+
+    <script src="js/script.js"></script>
+
+    <!-- PAYMENT SCRIPT -->
+
+    <script type="module" src="js/payment.js"></script>
+  </body>
+</html>
