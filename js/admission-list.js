@@ -98,7 +98,11 @@ onAuthStateChanged(auth, (user) => {
             "admin.html"
         );
 
+        return;
+
     }
+
+    loadAdmissions();
 
 });
 
@@ -2287,5 +2291,5 @@ function showLoading() {
 // =====================================================
 // START
 // =====================================================
-
-loadAdmissions();
+// loadAdmissions() এখন onAuthStateChanged থেকে
+// call হয় — auth confirm হওয়ার পরে।

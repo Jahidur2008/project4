@@ -92,7 +92,11 @@ onAuthStateChanged(
                 "admin.html"
             );
 
+            return;
+
         }
+
+        loadStudents();
 
     }
 );
@@ -1844,8 +1848,8 @@ function showLoading() {
 // =====================================================
 // START
 // =====================================================
-
-loadStudents();
+// loadStudents() এখন onAuthStateChanged থেকে
+// call হয় — auth confirm হওয়ার পরে।
 
 
 // =====================================================

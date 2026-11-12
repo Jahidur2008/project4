@@ -20,7 +20,11 @@ onAuthStateChanged(auth, (user) => {
 
         window.location.replace("admin.html");
 
+        return;
+
     }
+
+    loadDashboardStats();
 
 });
 
@@ -339,5 +343,5 @@ async function loadDashboardStats() {
 // =========================================
 // START DASHBOARD
 // =========================================
-
-loadDashboardStats();
+// loadDashboardStats() এখন onAuthStateChanged
+// থেকে call হয় — auth confirm হওয়ার পরে।

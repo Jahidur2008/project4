@@ -24,6 +24,7 @@ const firebaseConfig = {
   messagingSenderId: "994162587295",
   appId: "1:994162587295:web:be5e99a65f03e25005d4aa",
   measurementId: "G-Y60946CDM6"
+
 };
 
 

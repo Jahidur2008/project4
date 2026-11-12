@@ -749,6 +749,14 @@ body {
   border-color: rgba(211, 160, 81, 0.55);
 }
 
+/* quick-card anchor variant */
+
+a.quick-card {
+  text-decoration: none;
+
+  color: inherit;
+}
+
 .quick-icon {
   width: 40px;
   height: 40px;
