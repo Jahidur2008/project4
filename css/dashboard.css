@@ -722,6 +722,7 @@ body {
 
 .quick-card {
   min-height: 78px;
+  text-decoration: none;
 
   padding: 11px;
   cursor: pointer;
